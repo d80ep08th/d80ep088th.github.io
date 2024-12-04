@@ -1,12 +1,19 @@
 // DOM Elements
 document.addEventListener('DOMContentLoaded', function() {
+  // Existing initializations
   initializeNavigation();
   initializeTypewriter();
   initializeProjectFilters();
   initializeAnimations();
   initializeThemeToggle();
+  
+  // New initializations
+  const particleBackground = new ParticleBackground();
+  initializeTimelineAnimations();
+  initializeSkillAnimations();
+  initializeProjectAnimations();
+  initializeHoverEffects();
 });
-
 // Navigation and Scroll Functions
 function initializeNavigation() {
   const navLinks = document.querySelectorAll('.nav-link');
@@ -229,4 +236,173 @@ function showFormSuccess(message) {
           successDiv.style.display = 'none';
       }, 3000);
   }
+}
+
+// 1. Interactive Background with three.js
+class ParticleBackground {
+  constructor() {
+      this.container = document.querySelector('.hero');
+      this.createScene();
+      this.createParticles();
+      this.animate();
+
+      // Handle resize
+      window.addEventListener('resize', () => this.onWindowResize());
+  }
+
+  createScene() {
+      this.scene = new THREE.Scene();
+      this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      this.renderer = new THREE.WebGLRenderer({ alpha: true });
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
+      this.container.appendChild(this.renderer.domElement);
+      this.camera.position.z = 5;
+  }
+
+  createParticles() {
+      const particleGeometry = new THREE.BufferGeometry();
+      const particleCount = 1000;
+      const positions = new Float32Array(particleCount * 3);
+      
+      for(let i = 0; i < particleCount * 3; i += 3) {
+          positions[i] = (Math.random() - 0.5) * 10;
+          positions[i + 1] = (Math.random() - 0.5) * 10;
+          positions[i + 2] = (Math.random() - 0.5) * 10;
+      }
+      
+      particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      
+      const particleMaterial = new THREE.PointsMaterial({
+          color: 0x0366d6,
+          size: 0.05,
+          transparent: true
+      });
+      
+      this.particles = new THREE.Points(particleGeometry, particleMaterial);
+      this.scene.add(this.particles);
+  }
+
+  animate() {
+      requestAnimationFrame(() => this.animate());
+      this.particles.rotation.x += 0.001;
+      this.particles.rotation.y += 0.001;
+      this.renderer.render(this.scene, this.camera);
+  }
+
+  onWindowResize() {
+      this.camera.aspect = window.innerWidth / window.innerHeight;
+      this.camera.updateProjectionMatrix();
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
+  }
+}
+
+// 2. Animated Timeline with anime.js
+function initializeTimelineAnimations() {
+  const timelineItems = document.querySelectorAll('.timeline-item');
+  
+  timelineItems.forEach((item, index) => {
+      const animation = anime({
+          targets: item,
+          translateX: [-100, 0],
+          opacity: [0, 1],
+          duration: 800,
+          delay: index * 200,
+          easing: 'easeOutExpo',
+          autoplay: false
+      });
+
+      const observer = new IntersectionObserver(
+          (entries) => {
+              if (entries[0].isIntersecting) {
+                  animation.play();
+              }
+          },
+          { threshold: 0.2 }
+      );
+
+      observer.observe(item);
+  });
+}
+
+// 3. Skill Bar Animations
+function initializeSkillAnimations() {
+  const skillBars = document.querySelectorAll('.skill-progress');
+  
+  skillBars.forEach(bar => {
+      const progress = bar.getAttribute('data-progress');
+      
+      const animation = anime({
+          targets: bar,
+          width: `${progress}%`,
+          duration: 1500,
+          easing: 'easeInOutQuart',
+          autoplay: false
+      });
+
+      const observer = new IntersectionObserver(
+          (entries) => {
+              if (entries[0].isIntersecting) {
+                  animation.play();
+              }
+          },
+          { threshold: 0.2 }
+      );
+
+      observer.observe(bar);
+  });
+}
+
+// 4. Animated Project Cards
+function initializeProjectAnimations() {
+  const projectCards = document.querySelectorAll('.project-card');
+  
+  projectCards.forEach((card, index) => {
+      card.style.opacity = 0;
+      
+      const animation = anime({
+          targets: card,
+          translateY: [50, 0],
+          opacity: [0, 1],
+          duration: 800,
+          delay: index * 100,
+          easing: 'easeOutExpo',
+          autoplay: false
+      });
+
+      const observer = new IntersectionObserver(
+          (entries) => {
+              if (entries[0].isIntersecting) {
+                  animation.play();
+              }
+          },
+          { threshold: 0.2 }
+      );
+
+      observer.observe(card);
+  });
+}
+
+// 5. Interactive Hover Effects
+function initializeHoverEffects() {
+  const buttons = document.querySelectorAll('.filter-btn, .nav-link');
+  
+  buttons.forEach(button => {
+      button.addEventListener('mouseenter', (e) => {
+          anime({
+              targets: e.target,
+              scale: 1.1,
+              duration: 400,
+              easing: 'easeOutElastic(1, .8)'
+          });
+      });
+
+      button.addEventListener('mouseleave', (e) => {
+          anime({
+              targets: e.target,
+              scale: 1,
+              duration: 400,
+              easing: 'easeOutElastic(1, .8)'
+          });
+      });
+  });
 }
