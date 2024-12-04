@@ -28,7 +28,12 @@ class InteractiveSphere {
         // Add this line to position camera slightly above
         this.camera.position.y = 2;
         // Look at the center
-        this.camera.lookAt(0, 0, 0);            
+        this.camera.lookAt(0, 0, 0); 
+        
+        this.lastTouchPosition = {
+            x: 0,
+            y: 0
+        };
 
         this.portfolioData = {
             about: {
@@ -174,63 +179,65 @@ class InteractiveSphere {
     }
 
     onTouchStart(event) {
-        event.preventDefault(); // Prevent default touch behavior
+        event.preventDefault();
         
         if(event.touches.length === 1) {
             this.isTap = true;
-            this.isDragging = false;
+            this.isDragging = true; // Set to true immediately
             this.autoRotate = false;
             
             const touch = event.touches[0];
             this.touchStartPosition.x = touch.clientX;
             this.touchStartPosition.y = touch.clientY;
-            
-            // Clear any existing tap timeout
-            if(this.tapTimeout) {
-                clearTimeout(this.tapTimeout);
-            }
-            
-            // Set a new tap timeout
-            this.tapTimeout = setTimeout(() => {
-                this.isTap = false;
-            }, 200); // Consider it a tap if touch duration is less than 200ms
+    
+            this.lastTouchPosition = {
+                x: touch.clientX,
+                y: touch.clientY
+            };
         }
     }
 
     onTouchMove(event) {
-        if(event.touches.length !== 1) return;
+        event.preventDefault();
+        
+        if(!this.isDragging || event.touches.length !== 1) return;
         
         const touch = event.touches[0];
-        const deltaX = touch.clientX - this.touchStartPosition.x;
-        const deltaY = touch.clientY - this.touchStartPosition.y;
         
-        // If moved more than 10 pixels, consider it a drag instead of a tap
+        // Calculate the distance moved
+        const deltaX = touch.clientX - this.lastTouchPosition.x;
+        const deltaY = touch.clientY - this.lastTouchPosition.y;
+        
+        // If moved more than 10 pixels, definitely not a tap
         if(Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) {
             this.isTap = false;
-            this.isDragging = true;
         }
         
-        if(this.isDragging) {
-            const rotationDeltaX = deltaX * 0.01;
-            const rotationDeltaY = deltaY * 0.01;
-            this.rotateScene(rotationDeltaX, rotationDeltaY);
-        }
+        // Rotate the sphere based on touch movement
+        // Adjust these multipliers to control rotation sensitivity
+        const rotationX = deltaX * 0.005;
+        const rotationY = deltaY * 0.005;
         
-        this.touchStartPosition.x = touch.clientX;
-        this.touchStartPosition.y = touch.clientY;
+        this.quadrants.forEach(quadrant => {
+            quadrant.rotation.y += rotationX;
+            quadrant.rotation.x += rotationY;
+        });
+        
+        // Update the last position
+        this.lastTouchPosition = {
+            x: touch.clientX,
+            y: touch.clientY
+        };
     }
 
     onTouchEnd(event) {
         if(this.isTap) {
-            // Get the touch position
             const touch = event.changedTouches[0];
             const rect = this.renderer.domElement.getBoundingClientRect();
             
-            // Convert touch position to normalized device coordinates
             this.mouse.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
             this.mouse.y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
             
-            // Perform raycasting and selection
             this.raycaster.setFromCamera(this.mouse, this.camera);
             const intersects = this.raycaster.intersectObjects(this.quadrants);
             
@@ -239,13 +246,10 @@ class InteractiveSphere {
                 this.selectQuadrant(quadrant);
             }
         }
-    
+        
         // Reset states
         this.isDragging = false;
         this.isTap = false;
-        if(this.tapTimeout) {
-            clearTimeout(this.tapTimeout);
-        }
         
         // Re-enable auto-rotation after a delay
         setTimeout(() => {
