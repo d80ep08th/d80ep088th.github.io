@@ -86,22 +86,21 @@ class InteractiveSphere {
     }
 
     getOptimalCameraDistance() {
-        // Adjust camera distance based on screen size
         const screenWidth = window.innerWidth;
         if (screenWidth <= 480) {
-            return 8; // Mobile
+            return 10; // Mobile
         } else if (screenWidth <= 768) {
-            return 7; // Tablet
+            return 8; // Tablet
         } else {
-            return 5; // Desktop
+            return 6; // Desktop
         }
     }
 
     setupScene() {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.renderer.setPixelRatio(window.devicePixelRatio);
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         document.getElementById('scene-container').appendChild(this.renderer.domElement);
-        this.camera.position.z = 5;
+        
         
         this.scene.background = new THREE.Color(0x0a0a0a);
     }
