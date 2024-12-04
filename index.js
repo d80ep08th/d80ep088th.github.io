@@ -11,7 +11,10 @@ class InteractiveSphere {
     init() {
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        this.renderer = new THREE.WebGLRenderer({ antialias: true });
+        this.renderer = new THREE.WebGLRenderer({ 
+            antialias: true,
+            alpha: true 
+        });
         this.raycaster = new THREE.Raycaster();
         this.mouse = new THREE.Vector2();
         this.touchStartPosition = new THREE.Vector2();
@@ -19,6 +22,13 @@ class InteractiveSphere {
         this.selectedQuadrant = null;
         this.quadrants = [];
         this.autoRotate = true;
+    
+        // Set initial camera position
+        this.camera.position.z = this.getOptimalCameraDistance();
+        // Add this line to position camera slightly above
+        this.camera.position.y = 2;
+        // Look at the center
+        this.camera.lookAt(0, 0, 0);            
 
         this.portfolioData = {
             about: {
