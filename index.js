@@ -495,3 +495,22 @@ class InteractiveSphere {
 document.addEventListener('DOMContentLoaded', () => {
     new InteractiveSphere();
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM Content Loaded');
+    console.log('THREE.js version:', THREE.REVISION);
+    if (typeof THREE === 'undefined') {
+        console.error('THREE is not defined! Script might not be loading properly');
+        return;
+    }
+    new InteractiveSphere();
+});
+
+try {
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('Starting application');
+        new InteractiveSphere();
+    });
+} catch (error) {
+    console.error('Error in application:', error);
+}
