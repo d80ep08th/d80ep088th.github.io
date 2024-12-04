@@ -123,9 +123,10 @@ class InteractiveSphere {
             const material = new THREE.MeshPhongMaterial({
                 color: this.colors[i],
                 transparent: true,
-                opacity: 0.85,
+                opacity: 0.9, // Increased opacity
                 side: THREE.DoubleSide,
-                shininess: 50
+                shininess: 100, // Increased shininess
+                specular: new THREE.Color(0xffffff) // Add specular highlight
             });
             
             const quadrant = new THREE.Mesh(geometry, material);
