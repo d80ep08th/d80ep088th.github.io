@@ -182,15 +182,11 @@ class InteractiveSphere {
     }
 
     createSphere() {
-        console.log('Creating sphere with quadrants');
-
         const radius = 2;
         const segments = 64; // Increased for smoother look
         
         for(let i = 0; i < 8; i++) {
             // Create quadrant geometry
-            console.log(`Creating quadrant ${i}`);
-
             const geometry = new THREE.SphereGeometry(
                 radius,
                 segments,
@@ -211,6 +207,10 @@ class InteractiveSphere {
                 specular: new THREE.Color(0x444444)
             });
             
+            const quadrant = new THREE.Mesh(geometry, material);
+            quadrant.userData.index = i;
+            quadrant.userData.originalPosition = quadrant.position.clone();
+            
             // Create dot pattern
             if (i % 2 === 0) {
                 const dotGeometry = new THREE.SphereGeometry(radius * 0.2, 16, 16);
@@ -220,14 +220,9 @@ class InteractiveSphere {
                 });
                 const dot = new THREE.Mesh(dotGeometry, dotMaterial);
                 dot.position.y = radius * 0.5;
-                geometry.attach(dot);
+                // Instead of geometry.attach, add the dot to the quadrant
+                quadrant.add(dot);
             }
-            console.log('Total quadrants created:', this.quadrants.length);
-
-            
-            const quadrant = new THREE.Mesh(geometry, material);
-            quadrant.userData.index = i;
-            quadrant.userData.originalPosition = quadrant.position.clone();
             
             // Create label sprite
             const label = this.createTextSprite(this.labels[i]);
@@ -263,8 +258,8 @@ class InteractiveSphere {
             this.scene.add(group);
             this.labelSprites.push({ label, arrow });
         }
-
-                // Add circular border
+    
+        // Add circular border
         const borderGeometry = new THREE.TorusGeometry(radius, 0.05, 16, 100);
         const borderMaterial = new THREE.MeshPhongMaterial({ 
             color: 0x4a90e2,
