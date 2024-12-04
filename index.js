@@ -22,14 +22,13 @@ class InteractiveSphere {
         this.selectedQuadrant = null;
         this.quadrants = [];
         this.autoRotate = true;
+        this.labelSprites = [];
     
-        // Set initial camera position
+        // Camera setup - only do this once
         this.camera.position.z = this.getOptimalCameraDistance();
-        // Add this line to position camera slightly above
         this.camera.position.y = 2;
-        // Look at the center
-        this.camera.lookAt(0, 0, 0); 
-        
+        this.camera.lookAt(0, 0, 0);
+    
         this.lastTouchPosition = {
             x: 0,
             y: 0
@@ -101,8 +100,8 @@ class InteractiveSphere {
 
         // Create the sprite map for text textures
         this.labelSprites = [];
+
         
-        this.camera.position.z = this.getOptimalCameraDistance();
     }
 
     createTextSprite(message) {
@@ -151,6 +150,13 @@ class InteractiveSphere {
         
         
         this.scene.background = new THREE.Color(0x0a0a0a);
+    }
+
+    rotateScene(deltaX, deltaY) {
+        this.quadrants.forEach(quadrant => {
+            quadrant.rotation.y += deltaX;
+            quadrant.rotation.x += deltaY;
+        });
     }
 
     createSphere() {
@@ -260,6 +266,9 @@ class InteractiveSphere {
     setupControls() {
         const container = this.renderer.domElement;
         
+        container.addEventListener('click', (e) => this.onClick(e));
+
+
         // Track if it's a tap vs drag
         this.isTap = false;
         this.tapTimeout = null;
