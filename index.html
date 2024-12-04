@@ -1,34 +1,146 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parth P. Dodë - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
 <body>
- 
-    <div class="cf-container">
-      <div class="cf-flame-container"  id="fireNodes1">
-        <div class = "cf-flame">p</div>
-        <div class = "cf-flame">a</div>
-        <div class = "cf-flame">r</div>
-        <div class = "cf-flame">t</div>
-        <div class = "cf-flame">h</div>
-        <div class = "cf-flame">d</div>
-        <div class = "cf-flame"></div>
-      </div>
-      <div class="cf-flame-container" id="fireNodes2">
-        <div class = "cf-flame"></div>
-        <div class = "cf-flame"></div>
-        <div class = "cf-flame"></div>
-        <div class = "cf-flame"></div>
-        <div class = "cf-flame"></div>
-        <div class = "cf-flame"></div>
-        <div class = "cf-flame"></div>
-      </div>
-      <div class="cf-flame-container" id="base-fire">
-        <div class = "cf-flame"></div>
-        <div class = "cf-flame"></div>
-        <div class = "cf-flame"></div>
-      </div>
-      <div class= "cf-log-container">
-        <div class="cf-log"></div>
-        <div class="cf-log"></div>
-      <div>
-    </div>
-        </body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">Parth P. Dodë</div>
+        <button class="hamburger">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-menu">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#experience" class="nav-link">Experience</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <button class="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1 class="animate-on-scroll">Hello, I'm Parth</h1>
+            <div class="typewriter"></div>
+            <p class="animate-on-scroll">Master's Student at McMaster University</p>
+            <div class="social-links">
+                <a href="mailto:dodep@mcmaster.ca"><i class="fas fa-envelope"></i></a>
+                <a href="https://linkedin.com/in/parthdode" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/d80ep08th" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">About Me</h2>
+            <div class="about-content">
+                <div class="about-text animate-on-scroll">
+                    <p>Current Master of Engineering Design student with extensive experience in software development and DevOps seeking a 12-month Co-op term for Fall 2024.</p>
+                    <p>Strong background in automotive software implementing the Telematics Control Unit (TCU), from writing bare metal code to securely updating automotive over the air (OTA).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-content">
+                        <h3>Google Summer of Code 2022</h3>
+                        <h4>The Linux Foundation</h4>
+                        <p class="timeline-date">Apr 2022 - Sept 2022</p>
+                        <ul>
+                            <li>Remodeled Uptane OTA system documentation</li>
+                            <li>Mapped workflow of updating TCU in Uptane's Kubernetes ecosystem</li>
+                            <li>Reduced deployment time by 75%</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Add more experience items -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category animate-on-scroll">
+                    <h3>Software</h3>
+                    <div class="skill-item">
+                        <span>Docker</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="90"></div>
+                        </div>
+                    </div>
+                    <!-- Add more skills -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Projects</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="software">Software</button>
+                <button class="filter-btn" data-filter="devops">DevOps</button>
+                <button class="filter-btn" data-filter="academic">Academic</button>
+            </div>
+            <div class="projects-grid">
+                <!-- Project cards -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Contact</h2>
+            <form id="contact-form" class="animate-on-scroll">
+                <div class="form-group">
+                    <input type="text" id="name" required>
+                    <label for="name">Name</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" required>
+                    <label for="email">Email</label>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" required></textarea>
+                    <label for="message">Message</label>
+                </div>
+                <button type="submit">Send Message</button>
+                <div class="form-error"></div>
+                <div class="form-success"></div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Parth P. Dodë. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
 </html>

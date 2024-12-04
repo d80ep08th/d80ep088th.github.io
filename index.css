@@ -1,164 +1,316 @@
-$yellow-white: #f5ed8f;
-$bright-yellow: #fde239;
-$yellow: #ffdc01;
-$yellow-orange: #ffb401;
-$orange: #fdac01;
-$red-orange: #d73e0f;
-$red: #cd4015;
-$dark-red: #c63509;
-$log-color:#723830;
-$shadow:#372113;
-$animationtime:1.5s;
-
-body{
-background-color:$shadow;
-width:100vw;
-height:100vh;
-position:relative;
+:root {
+  --primary-color: #0366d6;
+  --secondary-color: #24292e;
+  --text-color: #333;
+  --background-color: #fff;
+  --accent-color: #f6f8fa;
+  --border-color: #e1e4e8;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --success-color: #28a745;
+  --error-color: #dc3545;
+  --animation-duration: 0.3s;
 }
 
-.cf-container{
-  box-sizing: content-box;
-  width: 300px;
-  height: 300px;
-  position:relative;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
+/* Dark Theme Variables */
+.dark-theme {
+  --primary-color: #58a6ff;
+  --secondary-color: #1f2428;
+  --text-color: #c9d1d9;
+  --background-color: #0d1117;
+  --accent-color: #161b22;
+  --border-color: #30363d;
+  --shadow-color: rgba(255, 255, 255, 0.1);
+}
 
-  .cf-flame-container{
-    width:100px;
-    height:100px;
-    bottom:0px;
-    position:absolute;
-  }
-  
-  .cf-log-container{
-    width:60%;
-    height:100px;
-    position:absolute;
-    bottom:0px;
-    left:50px;
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  transition: background-color var(--animation-duration), color var(--animation-duration);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Navigation */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: var(--background-color);
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px var(--shadow-color);
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color var(--animation-duration);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--primary-color);
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+  background-color: var(--accent-color);
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.typewriter {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.social-links a {
+  color: var(--text-color);
+  font-size: 1.5rem;
+  transition: color var(--animation-duration);
+}
+
+.social-links a:hover {
+  color: var(--primary-color);
+}
+
+/* Sections */
+section {
+  padding: 5rem 0;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background-color: var(--border-color);
+}
+
+.timeline-item {
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.timeline-content {
+  background-color: var(--accent-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+/* Skills */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.skill-bar {
+  background-color: var(--accent-color);
+  height: 10px;
+  border-radius: 5px;
+  margin-top: 0.5rem;
+}
+
+.skill-progress {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  width: 0;
+  transition: width 1s ease-in-out;
+}
+
+/* Projects */
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.filter-btn {
+  background: none;
+  border: 2px solid var(--primary-color);
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: all var(--animation-duration);
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+/* Contact Form */
+.contact form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  border-radius: 4px;
+}
+
+.form-group label {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-color);
+  transition: all var(--animation-duration);
+}
+
+.form-group input:focus + label,
+.form-group input:valid + label {
+  top: -0.5rem;
+  left: 0.5rem;
+  font-size: 0.8rem;
+  background-color: var(--background-color);
+  padding: 0 0.5rem;
+}
+
+/* Animations */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s, transform 0.6s;
+}
+
+.animate-on-scroll.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hamburger {
+      display: block;
   }
 
-  .cf-flame-container#base-fire{
-    
-    .cf-flame:nth-child(1){
-      background:$dark-red;
-      opacity:.95;
-    }
-    .cf-flame:nth-child(2){
-      background:$red;
-      width:100px;
-      height:100px;
-      opacity:.85;
-      left:75px;
-    }
-    .cf-flame:nth-child(3){
-      background:$red-orange;
-      width:60px;
-      height:60px;
-      opacity:.85;
-      left:130px;
-    }
+  .nav-menu {
+      position: fixed;
+      top: 80px;
+      right: -100%;
+      flex-direction: column;
+      background-color: var(--background-color);
+      width: 100%;
+      text-align: center;
+      transition: right var(--animation-duration);
+      padding: 2rem;
   }
-  
-  .cf-flame-container:nth-child(2){
-    width:150px;
-    height:150px;
-    bottom:0px;
-    position:absolute;
 
-    .cf-flame{
-    width:75px;
-    height:75px;
-    left:75px;
-    }
+  .nav-menu.active {
+      right: 0;
+  }
+
+  .timeline::before {
+      left: 0;
+  }
+
+  .timeline-content {
+      margin-left: 20px;
   }
 }
 
-.cf {
-
-  &-log{
-    background:$log-color;
-    width:20px;
-    height:30px;
-    transform-origin:center;
-    position:absolute;
-    bottom:0px;
-    border-radius:.5em;
-    box-shadow: 0 3px 10px $shadow;
-    width:100%;
-    &:nth-child(1){
-    transform:rotate(15deg);
-    }
-    &:nth-child(2){
-    transform:rotate(-15deg);
-    }
-  }
-  &-flame:nth-child(1){
-    background:$yellow-white;
-  }
-  &-flame:nth-child(2){
-    background:$bright-yellow;
-  }
-  &-flame:nth-child(3){
-    background:$yellow;
-  }
-  &-flame:nth-child(4){
-    background: $orange;
-  }
-  &-flame:nth-child(5){
-    background: $red-orange;
-  }
-  &-flame:nth-child(6){
-    background: $red;
-  }
-  &-flame:nth-child(7){
-    background: $dark-red;
-  }
-  &-flame:last-child{
-    background: $dark-red;
-  }
-  &-flame {
-    background: $red;
-    width:100px;
-    height:100px;
-    border-radius:1em;
-    position:absolute;
-    bottom:0px;
-    left:100px;
-  }
-  
+/* Theme Toggle */
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 1.2rem;
 }
 
-#fireNodes2 .cf-flame{
-   animation: flameColor $animationtime ease-out infinite;
-}
-
-@keyframes flameColor {
-   0% {
-     background:$dark-red;
-   }
-   20% {
-     background:$red;
-   }
-  30% {
-      background:$orange;
-   }
-  50% {
-      background:$yellow-orange;
-   }
-  60% {
-      background:$orange;
-   }
-  70% {
-      background:$yellow;
-   }
-  80% {
-      background:$bright-yellow;
-   }
-  100% {
-      background:$yellow-white;
-  }
+.theme-toggle:hover {
+  color: var(--primary-color);
 }
