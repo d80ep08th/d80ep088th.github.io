@@ -6,9 +6,8 @@
 
 body {
   overflow: hidden;
-  font-family: -apple-system, system-ui, sans-serif;
-  background: #0a192f;
-  color: #fff;
+  background: #0a0a0a;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, sans-serif;
 }
 
 #scene-container {
@@ -19,34 +18,72 @@ body {
   height: 100%;
 }
 
-.info-panel {
+.info-overlay {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
-  width: 80%;
-  max-width: 800px;
-  max-height: 80vh;
-  background: rgba(10, 25, 47, 0.95);
-  border: 1px solid #64ffda;
-  border-radius: 8px;
+  background: rgba(15, 15, 15, 0.95);
+  color: #fff;
   padding: 2rem;
+  border-radius: 1rem;
+  max-width: 90%;
+  max-height: 90vh;
+  width: 600px;
   overflow-y: auto;
   transition: transform 0.3s ease;
-  z-index: 1000;
+  border: 2px solid #4a90e2;
+  opacity: 0;
+  pointer-events: none;
 }
 
-.info-panel.active {
+.info-overlay.active {
   transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  pointer-events: all;
 }
 
-.close-btn {
+.close-button {
   position: absolute;
   top: 1rem;
   right: 1rem;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #64ffda;
+  color: #4a90e2;
+}
+
+.content {
+  margin-top: 1rem;
+}
+
+.content h2 {
+  color: #4a90e2;
+  margin-bottom: 1.5rem;
+}
+
+.content p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.timeline-item {
+  border-left: 2px solid #4a90e2;
+  padding-left: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.skill-item {
+  background: rgba(74, 144, 226, 0.1);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
 }
 
 .instructions {
@@ -54,32 +91,12 @@ body {
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(10, 25, 47, 0.8);
-  padding: 1rem;
-  border-radius: 4px;
+  background: rgba(74, 144, 226, 0.2);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
   font-size: 0.9rem;
-  color: #64ffda;
-}
-
-/* Content Styles */
-.content {
-  color: #8892b0;
-}
-
-.content h2 {
-  color: #64ffda;
-  margin-bottom: 1rem;
-}
-
-.content h3 {
-  color: #ccd6f6;
-  margin: 1rem 0;
-}
-
-.timeline-item {
-  margin-bottom: 2rem;
-  padding-left: 1rem;
-  border-left: 2px solid #64ffda;
+  pointer-events: none;
 }
 
 .social-links {
@@ -89,21 +106,12 @@ body {
 }
 
 .social-links a {
-  color: #64ffda;
+  color: #4a90e2;
   font-size: 1.5rem;
   text-decoration: none;
+  transition: color 0.3s;
 }
 
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.skill-item {
-  background: rgba(100, 255, 218, 0.1);
-  padding: 1rem;
-  border-radius: 4px;
-  text-align: center;
+.social-links a:hover {
+  color: #fff;
 }
