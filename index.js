@@ -58,6 +58,33 @@ class InteractiveSphere {
                     </div>`
             }
         };
+
+    
+                // Color palette - shades of green using complementary and analogous theory
+        this.colors = [
+            0x2E7D32, // Forest Green
+            0x66BB6A, // Light Green
+            0x1B5E20, // Dark Green
+            0x81C784, // Pale Green
+            0x4CAF50, // Medium Green
+            0xA5D6A7, // Sage Green
+            0x388E3C, // Kelly Green
+            0xC8E6C9  // Mint Green
+        ];
+        
+        this.camera.position.z = this.getOptimalCameraDistance();
+    }
+
+    getOptimalCameraDistance() {
+        // Adjust camera distance based on screen size
+        const screenWidth = window.innerWidth;
+        if (screenWidth <= 480) {
+            return 8; // Mobile
+        } else if (screenWidth <= 768) {
+            return 7; // Tablet
+        } else {
+            return 5; // Desktop
+        }
     }
 
     setupScene() {
@@ -73,7 +100,6 @@ class InteractiveSphere {
         const radius = 2;
         const segments = 32;
         
-        // Create quadrants
         for(let i = 0; i < 8; i++) {
             const geometry = new THREE.SphereGeometry(
                 radius,
@@ -86,10 +112,11 @@ class InteractiveSphere {
             );
             
             const material = new THREE.MeshPhongMaterial({
-                color: 0x4a90e2,
+                color: this.colors[i],
                 transparent: true,
-                opacity: 0.7,
-                side: THREE.DoubleSide
+                opacity: 0.85,
+                side: THREE.DoubleSide,
+                shininess: 50
             });
             
             const quadrant = new THREE.Mesh(geometry, material);
@@ -218,6 +245,7 @@ class InteractiveSphere {
 
     onWindowResize() {
         this.camera.aspect = window.innerWidth / window.innerHeight;
+        this.camera.position.z = this.getOptimalCameraDistance();
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(window.innerWidth, window.innerHeight);
     }
