@@ -75,19 +75,62 @@ class InteractiveSphere {
         };
 
     
-                // Color palette - shades of green using complementary and analogous theory
+                // Yin Yang colors
         this.colors = [
-            0x2E7D32, // Forest Green
-            0x66BB6A, // Light Green
-            0x1B5E20, // Dark Green
-            0x81C784, // Pale Green
-            0x4CAF50, // Medium Green
-            0xA5D6A7, // Sage Green
-            0x388E3C, // Kelly Green
-            0xC8E6C9  // Mint Green
+            0x000000, // Black
+            0xFFFFFF, // White
+            0x000000, // Black
+            0xFFFFFF, // White
+            0x000000, // Black (bottom hemisphere)
+            0xFFFFFF, // White (bottom hemisphere)
+            0x000000, // Black (bottom hemisphere)
+            0xFFFFFF  // White (bottom hemisphere)
         ];
+
+        // Labels for each quadrant
+        this.labels = [
+            'About Me: Technology enthusiast & MEng student',
+            'Experience: Google Summer of Code & DevOps',
+            'Education: Masters at McMaster University',
+            'Skills: Kubernetes, Docker, Security',
+            'Projects: Automotive Linux & Cloud',
+            'Certifications: Security & Development',
+            'Research: IoT & Cybersecurity',
+            'Contact: Find me @parthdode'
+        ];
+
+        // Create the sprite map for text textures
+        this.labelSprites = [];
         
         this.camera.position.z = this.getOptimalCameraDistance();
+    }
+
+    createTextSprite(message) {
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.width = 512;
+        canvas.height = 128;
+    
+        context.fillStyle = '#4a90e2';
+        context.strokeStyle = '#ffffff';
+        context.lineWidth = 2;
+        context.font = 'bold 24px Arial';
+        
+        // Create background
+        context.fillStyle = 'rgba(0, 0, 0, 0.8)';
+        context.roundRect(0, 0, canvas.width, canvas.height, 10);
+        context.fill();
+    
+        // Add text
+        context.fillStyle = '#ffffff';
+        context.fillText(message, 10, 30);
+    
+        const texture = new THREE.CanvasTexture(canvas);
+        const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+        const sprite = new THREE.Sprite(spriteMaterial);
+        sprite.scale.set(2, 0.5, 1);
+    
+        return sprite;
     }
 
     getOptimalCameraDistance() {
@@ -110,11 +153,12 @@ class InteractiveSphere {
         this.scene.background = new THREE.Color(0x0a0a0a);
     }
 
-     createSphere() {
+    createSphere() {
         const radius = 2;
-        const segments = 32;
+        const segments = 64; // Increased for smoother look
         
         for(let i = 0; i < 8; i++) {
+            // Create quadrant geometry
             const geometry = new THREE.SphereGeometry(
                 radius,
                 segments,
@@ -125,34 +169,92 @@ class InteractiveSphere {
                 Math.PI/2
             );
             
+            // Create material with gradient effect
             const material = new THREE.MeshPhongMaterial({
                 color: this.colors[i],
                 transparent: true,
-                opacity: 0.9, // Increased opacity
+                opacity: 0.9,
                 side: THREE.DoubleSide,
-                shininess: 100, // Increased shininess
-                specular: new THREE.Color(0xffffff) // Add specular highlight
+                shininess: 100,
+                specular: new THREE.Color(0x444444)
             });
+            
+            // Create dot pattern
+            if (i % 2 === 0) {
+                const dotGeometry = new THREE.SphereGeometry(radius * 0.2, 16, 16);
+                const dotMaterial = new THREE.MeshPhongMaterial({
+                    color: this.colors[i + 1],
+                    shininess: 100
+                });
+                const dot = new THREE.Mesh(dotGeometry, dotMaterial);
+                dot.position.y = radius * 0.5;
+                geometry.attach(dot);
+            }
             
             const quadrant = new THREE.Mesh(geometry, material);
             quadrant.userData.index = i;
             quadrant.userData.originalPosition = quadrant.position.clone();
-            this.quadrants.push(quadrant);
-            this.scene.add(quadrant);
+            
+            // Create label sprite
+            const label = this.createTextSprite(this.labels[i]);
+            label.position.set(radius * 2.5, radius * 0.5, 0);
+            
+            // Create arrow
+            const arrowGeometry = new THREE.BufferGeometry();
+            const points = [
+                new THREE.Vector3(radius * 1.1, radius * 0.5, 0),
+                new THREE.Vector3(radius * 2.2, radius * 0.5, 0),
+                new THREE.Vector3(radius * 2.2, radius * 0.7, 0)
+            ];
+            arrowGeometry.setFromPoints(points);
+            
+            const arrowMaterial = new THREE.LineBasicMaterial({ 
+                color: 0x4a90e2,
+                linewidth: 2
+            });
+            
+            const arrow = new THREE.Line(arrowGeometry, arrowMaterial);
+            
+            // Group quadrant, label and arrow
+            const group = new THREE.Group();
+            group.add(quadrant);
+            group.add(label);
+            group.add(arrow);
+            
+            // Hide label and arrow by default
+            label.visible = false;
+            arrow.visible = false;
+            
+            this.quadrants.push(group);
+            this.scene.add(group);
+            this.labelSprites.push({ label, arrow });
         }
+
+                // Add circular border
+        const borderGeometry = new THREE.TorusGeometry(radius, 0.05, 16, 100);
+        const borderMaterial = new THREE.MeshPhongMaterial({ 
+            color: 0x4a90e2,
+            shininess: 100
+        });
+        const border = new THREE.Mesh(borderGeometry, borderMaterial);
+        this.scene.add(border);
     }
 
+
     setupLights() {
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
         this.scene.add(ambientLight);
     
-        const pointLight1 = new THREE.PointLight(0xffffff, 1);
-        pointLight1.position.set(10, 10, 10);
+        const frontLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        frontLight.position.set(0, 0, 5);
         
-        const pointLight2 = new THREE.PointLight(0xffffff, 0.5);
-        pointLight2.position.set(-10, -10, -10);
+        const backLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        backLight.position.set(0, 0, -5);
         
-        this.scene.add(pointLight1, pointLight2);
+        const topLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        topLight.position.set(0, 5, 0);
+        
+        this.scene.add(frontLight, backLight, topLight);
     }
 
     setupControls() {
@@ -321,6 +423,12 @@ class InteractiveSphere {
         const direction = quadrant.position.clone().normalize();
         quadrant.position.copy(direction.multiplyScalar(0.2));
         this.selectedQuadrant = quadrant;
+
+            // Show label and arrow for selected quadrant
+        this.labelSprites.forEach((sprites, index) => {
+            sprites.label.visible = index === quadrant.userData.index;
+            sprites.arrow.visible = index === quadrant.userData.index;
+        });
     }
 
     onWindowResize() {
