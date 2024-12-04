@@ -1,14 +1,22 @@
 class InteractiveSphere {
     constructor() {
+        console.log('Constructor called');
         this.init();
+        console.log('Init completed');
         this.setupScene();
+        console.log('Scene setup completed');
         this.createSphere();
+        console.log('Sphere created');
         this.setupLights();
+        console.log('Lights setup completed');
         this.setupControls();
+        console.log('Controls setup completed');
         this.animate();
+        console.log('Animation started');
     }
 
     init() {
+        console.log('Starting init');
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         this.renderer = new THREE.WebGLRenderer({ 
@@ -28,6 +36,11 @@ class InteractiveSphere {
         this.camera.position.z = this.getOptimalCameraDistance();
         this.camera.position.y = 2;
         this.camera.lookAt(0, 0, 0);
+
+        console.log('Camera position set to:', {
+            z: this.camera.position.z,
+            y: this.camera.position.y
+        });
     
         this.lastTouchPosition = {
             x: 0,
@@ -141,15 +154,24 @@ class InteractiveSphere {
         } else {
             return 6; // Desktop
         }
+
+        console.log('Optimal camera distance calculated:', {
+            screenWidth,
+            distance
+        });
     }
 
     setupScene() {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         document.getElementById('scene-container').appendChild(this.renderer.domElement);
-        
+        console.log('Setting up scene with window dimensions:', {
+            width: window.innerWidth,
+            height: window.innerHeight
+        });
         
         this.scene.background = new THREE.Color(0x0a0a0a);
+        console.log('Scene container element:', document.getElementById('scene-container'));
     }
 
     rotateScene(deltaX, deltaY) {
@@ -160,11 +182,15 @@ class InteractiveSphere {
     }
 
     createSphere() {
+        console.log('Creating sphere with quadrants');
+
         const radius = 2;
         const segments = 64; // Increased for smoother look
         
         for(let i = 0; i < 8; i++) {
             // Create quadrant geometry
+            console.log(`Creating quadrant ${i}`);
+
             const geometry = new THREE.SphereGeometry(
                 radius,
                 segments,
@@ -196,6 +222,8 @@ class InteractiveSphere {
                 dot.position.y = radius * 0.5;
                 geometry.attach(dot);
             }
+            console.log('Total quadrants created:', this.quadrants.length);
+
             
             const quadrant = new THREE.Mesh(geometry, material);
             quadrant.userData.index = i;
@@ -248,6 +276,7 @@ class InteractiveSphere {
 
 
     setupLights() {
+        console.log('Setting up lights');
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
         this.scene.add(ambientLight);
     
@@ -448,6 +477,8 @@ class InteractiveSphere {
     }
 
     animate() {
+        console.log('First animation frame');
+
         requestAnimationFrame(() => this.animate());
         
         if(this.autoRotate) {
