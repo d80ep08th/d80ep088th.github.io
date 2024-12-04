@@ -138,11 +138,16 @@ class InteractiveSphere {
     }
 
     setupLights() {
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-        const pointLight = new THREE.PointLight(0xffffff, 1);
-        pointLight.position.set(10, 10, 10);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        this.scene.add(ambientLight);
+    
+        const pointLight1 = new THREE.PointLight(0xffffff, 1);
+        pointLight1.position.set(10, 10, 10);
         
-        this.scene.add(ambientLight, pointLight);
+        const pointLight2 = new THREE.PointLight(0xffffff, 0.5);
+        pointLight2.position.set(-10, -10, -10);
+        
+        this.scene.add(pointLight1, pointLight2);
     }
 
     setupControls() {
@@ -265,7 +270,8 @@ class InteractiveSphere {
         
         if(this.autoRotate) {
             this.quadrants.forEach(quadrant => {
-                quadrant.rotation.y += 0.001;
+                quadrant.rotation.y += 0.002;
+                quadrant.rotation.x += 0.001;
             });
         }
         
