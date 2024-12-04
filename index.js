@@ -105,7 +105,7 @@ class InteractiveSphere {
         this.scene.background = new THREE.Color(0x0a0a0a);
     }
 
-    createSphere() {
+     createSphere() {
         const radius = 2;
         const segments = 32;
         
@@ -153,20 +153,104 @@ class InteractiveSphere {
     setupControls() {
         const container = this.renderer.domElement;
         
+        // Track if it's a tap vs drag
+        this.isTap = false;
+        this.tapTimeout = null;
+        
+        // Mouse events
         container.addEventListener('mousedown', (e) => this.onPointerDown(e));
         container.addEventListener('mousemove', (e) => this.onPointerMove(e));
-        container.addEventListener('mouseup', () => this.onPointerUp());
+        container.addEventListener('mouseup', (e) => this.onPointerUp(e));
         
-        container.addEventListener('touchstart', (e) => this.onTouchStart(e));
-        container.addEventListener('touchmove', (e) => this.onTouchMove(e));
-        container.addEventListener('touchend', () => this.onPointerUp());
-        
-        container.addEventListener('click', (e) => this.onClick(e));
+        // Touch events
+        container.addEventListener('touchstart', (e) => this.onTouchStart(e), { passive: false });
+        container.addEventListener('touchmove', (e) => this.onTouchMove(e), { passive: false });
+        container.addEventListener('touchend', (e) => this.onTouchEnd(e));
         
         window.addEventListener('resize', () => this.onWindowResize());
         
         document.querySelector('.close-button').addEventListener('click', 
             () => document.querySelector('.info-overlay').classList.remove('active'));
+    }
+
+    onTouchStart(event) {
+        event.preventDefault(); // Prevent default touch behavior
+        
+        if(event.touches.length === 1) {
+            this.isTap = true;
+            this.isDragging = false;
+            this.autoRotate = false;
+            
+            const touch = event.touches[0];
+            this.touchStartPosition.x = touch.clientX;
+            this.touchStartPosition.y = touch.clientY;
+            
+            // Clear any existing tap timeout
+            if(this.tapTimeout) {
+                clearTimeout(this.tapTimeout);
+            }
+            
+            // Set a new tap timeout
+            this.tapTimeout = setTimeout(() => {
+                this.isTap = false;
+            }, 200); // Consider it a tap if touch duration is less than 200ms
+        }
+    }
+
+    onTouchMove(event) {
+        if(event.touches.length !== 1) return;
+        
+        const touch = event.touches[0];
+        const deltaX = touch.clientX - this.touchStartPosition.x;
+        const deltaY = touch.clientY - this.touchStartPosition.y;
+        
+        // If moved more than 10 pixels, consider it a drag instead of a tap
+        if(Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) {
+            this.isTap = false;
+            this.isDragging = true;
+        }
+        
+        if(this.isDragging) {
+            const rotationDeltaX = deltaX * 0.01;
+            const rotationDeltaY = deltaY * 0.01;
+            this.rotateScene(rotationDeltaX, rotationDeltaY);
+        }
+        
+        this.touchStartPosition.x = touch.clientX;
+        this.touchStartPosition.y = touch.clientY;
+    }
+
+    onTouchEnd(event) {
+        if(this.isTap) {
+            // Get the touch position
+            const touch = event.changedTouches[0];
+            const rect = this.renderer.domElement.getBoundingClientRect();
+            
+            // Convert touch position to normalized device coordinates
+            this.mouse.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
+            this.mouse.y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
+            
+            // Perform raycasting and selection
+            this.raycaster.setFromCamera(this.mouse, this.camera);
+            const intersects = this.raycaster.intersectObjects(this.quadrants);
+            
+            if(intersects.length > 0) {
+                const quadrant = intersects[0].object;
+                this.selectQuadrant(quadrant);
+            }
+        }
+    
+        // Reset states
+        this.isDragging = false;
+        this.isTap = false;
+        if(this.tapTimeout) {
+            clearTimeout(this.tapTimeout);
+        }
+        
+        // Re-enable auto-rotation after a delay
+        setTimeout(() => {
+            this.autoRotate = true;
+        }, 2000);
     }
 
     onPointerDown(event) {
@@ -176,15 +260,7 @@ class InteractiveSphere {
         this.touchStartPosition.y = event.clientY;
     }
 
-    onTouchStart(event) {
-        if(event.touches.length === 1) {
-            event.preventDefault();
-            this.isDragging = true;
-            this.autoRotate = false;
-            this.touchStartPosition.x = event.touches[0].clientX;
-            this.touchStartPosition.y = event.touches[0].clientY;
-        }
-    }
+ 
 
     onPointerMove(event) {
         if(!this.isDragging) return;
@@ -198,25 +274,7 @@ class InteractiveSphere {
         this.touchStartPosition.y = event.clientY;
     }
 
-    onTouchMove(event) {
-        if(!this.isDragging || event.touches.length !== 1) return;
-        
-        const touch = event.touches[0];
-        const deltaX = (touch.clientX - this.touchStartPosition.x) * 0.01;
-        const deltaY = (touch.clientY - this.touchStartPosition.y) * 0.01;
-        
-        this.rotateScene(deltaX, deltaY);
-        
-        this.touchStartPosition.x = touch.clientX;
-        this.touchStartPosition.y = touch.clientY;
-    }
 
-    rotateScene(deltaX, deltaY) {
-        this.quadrants.forEach(quadrant => {
-            quadrant.rotation.y += deltaX;
-            quadrant.rotation.x += deltaY;
-        });
-    }
 
     onPointerUp() {
         this.isDragging = false;
@@ -226,18 +284,21 @@ class InteractiveSphere {
     }
 
     onClick(event) {
-        event.preventDefault();
-        
-        this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-        
-        this.raycaster.setFromCamera(this.mouse, this.camera);
-        
-        const intersects = this.raycaster.intersectObjects(this.quadrants);
-        
-        if(intersects.length > 0) {
-            const quadrant = intersects[0].object;
-            this.selectQuadrant(quadrant);
+        // Only handle actual mouse clicks here
+        if(event.type === 'click' && !this.isDragging) {
+            event.preventDefault();
+            
+            const rect = this.renderer.domElement.getBoundingClientRect();
+            this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+            this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+            
+            this.raycaster.setFromCamera(this.mouse, this.camera);
+            const intersects = this.raycaster.intersectObjects(this.quadrants);
+            
+            if(intersects.length > 0) {
+                const quadrant = intersects[0].object;
+                this.selectQuadrant(quadrant);
+            }
         }
     }
 
