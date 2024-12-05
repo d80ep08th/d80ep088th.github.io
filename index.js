@@ -111,39 +111,12 @@ class InteractiveSphere {
             'Contact: Find me @parthdode'
         ];
 
-        // Create the sprite map for text textures
-        this.labelSprites = [];
+
 
         
     }
 
-    createTextSprite(message) {
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        canvas.width = 512;
-        canvas.height = 128;
-    
-        context.fillStyle = '#4a90e2';
-        context.strokeStyle = '#ffffff';
-        context.lineWidth = 2;
-        context.font = 'bold 24px Arial';
-        
-        // Create background
-        context.fillStyle = 'rgba(0, 0, 0, 0.8)';
-        context.roundRect(0, 0, canvas.width, canvas.height, 10);
-        context.fill();
-    
-        // Add text
-        context.fillStyle = '#ffffff';
-        context.fillText(message, 10, 30);
-    
-        const texture = new THREE.CanvasTexture(canvas);
-        const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
-        const sprite = new THREE.Sprite(spriteMaterial);
-        sprite.scale.set(2, 0.5, 1);
-    
-        return sprite;
-    }
+
 
     getOptimalCameraDistance() {
         const screenWidth = window.innerWidth;
@@ -224,39 +197,20 @@ class InteractiveSphere {
                 quadrant.add(dot);
             }
             
-            // Create label sprite
-            const label = this.createTextSprite(this.labels[i]);
-            label.position.set(radius * 2.5, radius * 0.5, 0);
             
-            // Create arrow
-            const arrowGeometry = new THREE.BufferGeometry();
-            const points = [
-                new THREE.Vector3(radius * 1.1, radius * 0.5, 0),
-                new THREE.Vector3(radius * 2.2, radius * 0.5, 0),
-                new THREE.Vector3(radius * 2.2, radius * 0.7, 0)
-            ];
-            arrowGeometry.setFromPoints(points);
             
-            const arrowMaterial = new THREE.LineBasicMaterial({ 
-                color: 0x4a90e2,
-                linewidth: 2
-            });
-            
-            const arrow = new THREE.Line(arrowGeometry, arrowMaterial);
+          
             
             // Group quadrant, label and arrow
             const group = new THREE.Group();
             group.add(quadrant);
-            group.add(label);
-            group.add(arrow);
+
             
-            // Hide label and arrow by default
-            label.visible = false;
-            arrow.visible = false;
+
             
             this.quadrants.push(group);
             this.scene.add(group);
-            this.labelSprites.push({ label, arrow });
+            
         }
     
         // Add circular border
@@ -457,11 +411,7 @@ class InteractiveSphere {
         quadrant.position.copy(direction.multiplyScalar(0.2));
         this.selectedQuadrant = quadrant;
 
-            // Show label and arrow for selected quadrant
-        this.labelSprites.forEach((sprites, index) => {
-            sprites.label.visible = index === quadrant.userData.index;
-            sprites.arrow.visible = index === quadrant.userData.index;
-        });
+
     }
 
     onWindowResize() {
