@@ -87,7 +87,7 @@ class InteractiveSphere {
         };
 
     
-        this.colors = Array(8).fill(0xFFFFFF);
+        this.colors = Array(8).fill(0x0000FF);
 
         // Labels for each quadrant
         this.labels = [
