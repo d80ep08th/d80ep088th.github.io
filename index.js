@@ -156,10 +156,9 @@ class InteractiveSphere {
 
     createSphere() {
         const radius = 2;
-        const segments = 64; // Increased for smoother look
+        const segments = 64;
         
         for(let i = 0; i < 8; i++) {
-            // Create quadrant geometry
             const geometry = new THREE.SphereGeometry(
                 radius,
                 segments,
@@ -170,7 +169,6 @@ class InteractiveSphere {
                 Math.PI/2
             );
             
-            // Create material with gradient effect
             const material = new THREE.MeshPhongMaterial({
                 color: this.colors[i],
                 transparent: true,
@@ -184,33 +182,41 @@ class InteractiveSphere {
             quadrant.userData.index = i;
             quadrant.userData.originalPosition = quadrant.position.clone();
             
-            // Create dot pattern
-            if (i % 2 === 0) {
-                const dotGeometry = new THREE.SphereGeometry(radius * 0.2, 16, 16);
-                const dotMaterial = new THREE.MeshPhongMaterial({
-                    color: this.colors[i + 1],
-                    shininess: 100
-                });
-                const dot = new THREE.Mesh(dotGeometry, dotMaterial);
-                dot.position.y = radius * 0.5;
-                // Instead of geometry.attach, add the dot to the quadrant
-                quadrant.add(dot);
-            }
+            // Create label for each quadrant
+            const sections = ['about', 'experience', 'education', 'skills'];
+            const title = this.portfolioData[sections[i % 4]].title;
             
+            // Create canvas for text
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = 256;
+            canvas.height = 64;
+            context.font = 'bold 24px Arial';
+            context.fillStyle = this.colors[i] === 0x000000 ? '#FFFFFF' : '#000000';
+            context.textAlign = 'center';
+            context.textBaseline = 'middle';
+            context.fillText(title, 128, 32);
             
+            // Create sprite from canvas
+            const texture = new THREE.CanvasTexture(canvas);
+            const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+            const sprite = new THREE.Sprite(spriteMaterial);
             
-          
+            // Position sprite relative to quadrant
+            const angle = (i % 4) * Math.PI/2 + Math.PI/4;
+            sprite.position.set(
+                Math.cos(angle) * (radius + 0.5),
+                i < 4 ? 1 : -1,
+                Math.sin(angle) * (radius + 0.5)
+            );
+            sprite.scale.set(1, 0.25, 1);
             
-            // Group quadrant, label and arrow
             const group = new THREE.Group();
             group.add(quadrant);
-
-            
-
+            group.add(sprite);
             
             this.quadrants.push(group);
             this.scene.add(group);
-            
         }
     
         // Add circular border
