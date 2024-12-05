@@ -87,17 +87,7 @@ class InteractiveSphere {
         };
 
     
-                // Yin Yang colors
-        this.colors = [
-            0x000000, // Black
-            0xFFFFFF, // White
-            0x000000, // Black
-            0xFFFFFF, // White
-            0x000000, // Black (bottom hemisphere)
-            0xFFFFFF, // White (bottom hemisphere)
-            0x000000, // Black (bottom hemisphere)
-            0xFFFFFF  // White (bottom hemisphere)
-        ];
+        this.colors = Array(8).fill(0xFFFFFF);
 
         // Labels for each quadrant
         this.labels = [
