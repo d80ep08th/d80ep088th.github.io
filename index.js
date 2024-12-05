@@ -179,34 +179,12 @@ class InteractiveSphere {
             quadrant.userData.index = i;
             quadrant.userData.originalPosition = quadrant.position.clone();
             
-            // Create border curves for each quadrant
-            const curves = [];
-            const phi = (i % 4) * Math.PI/2;
-            const theta = i < 4 ? 0 : Math.PI/2;
-    
-            // Vertical border
-            const verticalCurve = new THREE.LineCurve3(
-                new THREE.Vector3(radius * Math.cos(phi), -radius, radius * Math.sin(phi)),
-                new THREE.Vector3(radius * Math.cos(phi), radius, radius * Math.sin(phi))
-            );
-    
-            // Horizontal border
-            const horizontalCurve = new THREE.LineCurve3(
-                new THREE.Vector3(radius * Math.cos(phi), radius * Math.sin(theta), radius * Math.cos(theta)),
-                new THREE.Vector3(radius * Math.cos(phi + Math.PI/2), radius * Math.sin(theta), radius * Math.cos(theta))
-            );
-    
-            curves.push(verticalCurve, horizontalCurve);
-    
-            curves.forEach(curve => {
-                const tubeGeometry = new THREE.TubeGeometry(curve, 1, 0.02, 8, false);
-                const borderMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-                const border = new THREE.Mesh(tubeGeometry, borderMaterial);
-                quadrant.add(border);
-            });
-    
+            // Store original color for hover effect
+            quadrant.userData.originalColor = 0x0000FF;  // Blue
+            quadrant.userData.hoverColor = 0x000000;     // Black
+            
             // Label creation with green text
-            const title = sections[i];  // Use the section title directly from array
+            const title = sections[i];
             
             const canvas = document.createElement('canvas');
             const context = canvas.getContext('2d');
@@ -247,6 +225,7 @@ class InteractiveSphere {
         const border = new THREE.Mesh(borderGeometry, borderMaterial);
         this.scene.add(border);
     }
+    
 
     setupLights() {
         // Simplified lighting setup
@@ -304,6 +283,7 @@ class InteractiveSphere {
     }
 
     // Add touch support for hover effects
+    // Update touch handling for mobile devices
     onTouchMove(event) {
         event.preventDefault();
         
@@ -319,18 +299,18 @@ class InteractiveSphere {
             this.quadrants.map(group => group.children[0])
         );
         
-        // Reset all quadrants
-        this.quadrants.forEach(group => {
-            const quadrant = group.children[0];
-            quadrant.material.opacity = quadrant.userData.originalOpacity;
-            quadrant.material.color.setHex(quadrant.userData.originalColor);
-        });
+        // Reset previously hovered quadrant
+        if (this.hoveredQuadrant && this.hoveredQuadrant !== intersects[0]?.object) {
+            this.hoveredQuadrant.material.color.setHex(this.hoveredQuadrant.userData.originalColor);
+        }
         
-        // Highlight touched quadrant
-        if(intersects.length > 0) {
+        // Set new hovered quadrant
+        if (intersects.length > 0) {
             const quadrant = intersects[0].object;
-            quadrant.material.opacity = 1.0;
-            quadrant.material.color.copy(quadrant.userData.hoverColor);
+            quadrant.material.color.setHex(quadrant.userData.hoverColor);
+            this.hoveredQuadrant = quadrant;
+        } else {
+            this.hoveredQuadrant = null;
         }
         
         // Existing touch rotation logic
@@ -391,6 +371,7 @@ class InteractiveSphere {
 
  
 
+    // Update the hover effect in onPointerMove
     onPointerMove(event) {
         if(!this.isDragging) {
             const rect = this.renderer.domElement.getBoundingClientRect();
@@ -402,18 +383,18 @@ class InteractiveSphere {
                 this.quadrants.map(group => group.children[0])
             );
             
-            // Reset all quadrants
-            this.quadrants.forEach(group => {
-                const quadrant = group.children[0];
-                quadrant.material.opacity = quadrant.userData.originalOpacity;
-                quadrant.material.color.setHex(quadrant.userData.originalColor);
-            });
+            // First reset the previously hovered quadrant (if any) back to blue
+            if (this.hoveredQuadrant && this.hoveredQuadrant !== intersects[0]?.object) {
+                this.hoveredQuadrant.material.color.setHex(this.hoveredQuadrant.userData.originalColor);
+            }
             
-            // Highlight hovered quadrant
-            if(intersects.length > 0) {
+            // Then set the newly hovered quadrant to black
+            if (intersects.length > 0) {
                 const quadrant = intersects[0].object;
-                quadrant.material.opacity = 1.0;
-                quadrant.material.color.copy(quadrant.userData.hoverColor);
+                quadrant.material.color.setHex(quadrant.userData.hoverColor);
+                this.hoveredQuadrant = quadrant;
+            } else {
+                this.hoveredQuadrant = null;
             }
         }
         
@@ -426,6 +407,7 @@ class InteractiveSphere {
             this.touchStartPosition.y = event.clientY;
         }
     }
+
 
 
 
