@@ -172,27 +172,23 @@ class InteractiveSphere {
             quadrant.userData.index = i;
             quadrant.userData.originalPosition = quadrant.position.clone();
             
-            // Create label for each quadrant
             const sections = ['about', 'experience', 'education', 'skills'];
             const title = this.portfolioData[sections[i % 4]].title;
             
-            // Create canvas for text
             const canvas = document.createElement('canvas');
             const context = canvas.getContext('2d');
             canvas.width = 256;
             canvas.height = 64;
             context.font = 'bold 24px Arial';
-            context.fillStyle = this.colors[i] === 0x000000 ? '#FFFFFF' : '#000000';
+            context.fillStyle = '#00FF00'; // Changed to green
             context.textAlign = 'center';
             context.textBaseline = 'middle';
             context.fillText(title, 128, 32);
             
-            // Create sprite from canvas
             const texture = new THREE.CanvasTexture(canvas);
             const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
             const sprite = new THREE.Sprite(spriteMaterial);
             
-            // Position sprite relative to quadrant
             const angle = (i % 4) * Math.PI/2 + Math.PI/4;
             sprite.position.set(
                 Math.cos(angle) * (radius + 0.5),
@@ -208,17 +204,15 @@ class InteractiveSphere {
             this.quadrants.push(group);
             this.scene.add(group);
         }
-    
-        // Add circular border
+        
         const borderGeometry = new THREE.TorusGeometry(radius, 0.05, 16, 100);
         const borderMaterial = new THREE.MeshPhongMaterial({ 
-            color: 0x4a90e2,
+            color: 0x000000,
             shininess: 100
         });
         const border = new THREE.Mesh(borderGeometry, borderMaterial);
         this.scene.add(border);
     }
-
 
     setupLights() {
         console.log('Setting up lights');
