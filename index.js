@@ -5,6 +5,8 @@ class InteractiveSphere {
         console.log('Init completed');
         this.setupScene();
         console.log('Scene setup completed');
+        this.createSceneText();
+        console.log('Name & Tag Line rendered');
         this.createSphere();
         console.log('Sphere created');
         this.setupLights();
@@ -13,6 +15,8 @@ class InteractiveSphere {
         console.log('Controls setup completed');
         this.animate();
         console.log('Animation started');
+        
+
     }
 
     init() {
@@ -106,6 +110,60 @@ class InteractiveSphere {
         
     }
 
+
+    createSceneText() {
+        // Create canvas for the name
+        const nameCanvas = document.createElement('canvas');
+        const nameCtx = nameCanvas.getContext('2d');
+        nameCanvas.width = 512;
+        nameCanvas.height = 128;
+    
+        // Set up the hacker-style font for name
+        nameCtx.font = 'bold 48px "Courier New", monospace';
+        nameCtx.fillStyle = '#00FF00'; // Bright green
+        nameCtx.textAlign = 'center';
+        nameCtx.textBaseline = 'middle';
+        
+        // Add a glow effect
+        nameCtx.shadowColor = '#00FF00';
+        nameCtx.shadowBlur = 10;
+        nameCtx.fillText('Parth P. Dodë', 256, 64);
+    
+        // Create texture and sprite for name
+        const nameTexture = new THREE.CanvasTexture(nameCanvas);
+        const nameSpriteMaterial = new THREE.SpriteMaterial({ map: nameTexture });
+        const nameSprite = new THREE.Sprite(nameSpriteMaterial);
+        nameSprite.position.set(0, 3.5, 0); // Position above the sphere
+        nameSprite.scale.set(2.5, 0.6, 1);
+    
+        // Create canvas for the tagline
+        const taglineCanvas = document.createElement('canvas');
+        const tagCtx = taglineCanvas.getContext('2d');
+        taglineCanvas.width = 512;
+        taglineCanvas.height = 128;
+    
+        // Set up the hacker-style font for tagline
+        tagCtx.font = '32px "Courier New", monospace';
+        tagCtx.fillStyle = '#00FF00'; // Same green color
+        tagCtx.textAlign = 'center';
+        tagCtx.textBaseline = 'middle';
+        
+        // Add glow effect to tagline
+        tagCtx.shadowColor = '#00FF00';
+        tagCtx.shadowBlur = 8;
+        tagCtx.fillText('WELL ROUNDED', 256, 64);
+    
+        // Create texture and sprite for tagline
+        const taglineTexture = new THREE.CanvasTexture(taglineCanvas);
+        const taglineSpriteMaterial = new THREE.SpriteMaterial({ map: taglineTexture });
+        const taglineSprite = new THREE.Sprite(taglineSpriteMaterial);
+        taglineSprite.position.set(0, 3, 0); // Position below the name
+        taglineSprite.scale.set(2, 0.4, 1);
+    
+        // Add both sprites to the scene
+        this.scene.add(nameSprite);
+        this.scene.add(taglineSprite);
+    }
 
 
     getOptimalCameraDistance() {
