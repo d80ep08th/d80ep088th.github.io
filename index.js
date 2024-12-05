@@ -87,7 +87,47 @@ class InteractiveSphere {
                             <p>Kubernetes, Docker, Ansible</p>
                         </div>
                     </div>`
-            }
+            },
+            frontend: {
+                title: "Frontend",
+                content: `<h2>Experience with Frotend</h2>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <h3>DevOps</h3>
+                            <p>HTML, CSS, JS</p>
+                        </div>
+                    </div>`
+            },
+            devops: {
+                title: "DevOps",
+                content: `<h2>Experience with DevOps</h2>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <h3>DevOps</h3>
+                            <p>Ansible</p>
+                        </div>
+                    </div>`
+            },
+            backend: {
+                title: "Backend",
+                content: `<h2>Experience with Backend</h2>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <h3>Backend</h3>
+                            <p>Django, Meteor</p>
+                        </div>
+                    </div>`
+            },
+            design: {
+                title: "Design",
+                content: `<h2>Experience with Design</h2>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <h3>Design</h3>
+                            <p>Figma, AutoCad Fusion 360</p>
+                        </div>
+                    </div>`
+            },
         };
 
     
@@ -99,10 +139,10 @@ class InteractiveSphere {
             'Experience: Google Summer of Code & DevOps',
             'Education: Masters at McMaster University',
             'Skills: Kubernetes, Docker, Security',
-            'Projects: Automotive Linux & Cloud',
-            'Certifications: Security & Development',
-            'Research: IoT & Cybersecurity',
-            'Contact: Find me @parthdode'
+            'Frontend: Automotive Linux & Cloud',
+            'DevOps: Security & Development',
+            'Backend: IoT & Cybersecurity',
+            'Design: Find me @parthdode'
         ];
 
 
@@ -209,7 +249,7 @@ class InteractiveSphere {
         // Define all 8 section titles
         const sections = [
             'About', 'Experience', 'Education', 'Skills',
-            'Projects', 'Design', 'Engineering', 'DevOps'
+            'Frontend', 'DevOps', 'Backend', 'Design'
         ];
         
         for(let i = 0; i < 8; i++) {
