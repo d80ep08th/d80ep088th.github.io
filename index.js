@@ -148,6 +148,12 @@ class InteractiveSphere {
         const radius = 2;
         const segments = 64;
         
+        // Define all 8 section titles
+        const sections = [
+            'About', 'Experience', 'Education', 'Skills',
+            'Projects', 'Design', 'Engineering', 'DevOps'
+        ];
+        
         for(let i = 0; i < 8; i++) {
             const geometry = new THREE.SphereGeometry(
                 radius,
@@ -159,8 +165,9 @@ class InteractiveSphere {
                 Math.PI/2
             );
             
+            // Create quadrant with blue material
             const material = new THREE.MeshPhongMaterial({
-                color: this.colors[i],
+                color: 0x0000FF,
                 transparent: true,
                 opacity: 0.9,
                 side: THREE.DoubleSide,
@@ -172,15 +179,41 @@ class InteractiveSphere {
             quadrant.userData.index = i;
             quadrant.userData.originalPosition = quadrant.position.clone();
             
-            const sections = ['about', 'experience', 'education', 'skills'];
-            const title = this.portfolioData[sections[i % 4]].title;
+            // Create border curves for each quadrant
+            const curves = [];
+            const phi = (i % 4) * Math.PI/2;
+            const theta = i < 4 ? 0 : Math.PI/2;
+    
+            // Vertical border
+            const verticalCurve = new THREE.LineCurve3(
+                new THREE.Vector3(radius * Math.cos(phi), -radius, radius * Math.sin(phi)),
+                new THREE.Vector3(radius * Math.cos(phi), radius, radius * Math.sin(phi))
+            );
+    
+            // Horizontal border
+            const horizontalCurve = new THREE.LineCurve3(
+                new THREE.Vector3(radius * Math.cos(phi), radius * Math.sin(theta), radius * Math.cos(theta)),
+                new THREE.Vector3(radius * Math.cos(phi + Math.PI/2), radius * Math.sin(theta), radius * Math.cos(theta))
+            );
+    
+            curves.push(verticalCurve, horizontalCurve);
+    
+            curves.forEach(curve => {
+                const tubeGeometry = new THREE.TubeGeometry(curve, 1, 0.02, 8, false);
+                const borderMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+                const border = new THREE.Mesh(tubeGeometry, borderMaterial);
+                quadrant.add(border);
+            });
+    
+            // Label creation with green text
+            const title = sections[i];  // Use the section title directly from array
             
             const canvas = document.createElement('canvas');
             const context = canvas.getContext('2d');
             canvas.width = 256;
             canvas.height = 64;
             context.font = 'bold 24px Arial';
-            context.fillStyle = '#00FF00'; // Changed to green
+            context.fillStyle = '#00FF00';  // Green color for labels
             context.textAlign = 'center';
             context.textBaseline = 'middle';
             context.fillText(title, 128, 32);
@@ -205,6 +238,7 @@ class InteractiveSphere {
             this.scene.add(group);
         }
         
+        // Main sphere border
         const borderGeometry = new THREE.TorusGeometry(radius, 0.05, 16, 100);
         const borderMaterial = new THREE.MeshPhongMaterial({ 
             color: 0x000000,
@@ -215,20 +249,13 @@ class InteractiveSphere {
     }
 
     setupLights() {
-        console.log('Setting up lights');
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+        // Simplified lighting setup
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
         this.scene.add(ambientLight);
     
-        const frontLight = new THREE.DirectionalLight(0xffffff, 0.8);
-        frontLight.position.set(0, 0, 5);
-        
-        const backLight = new THREE.DirectionalLight(0xffffff, 0.5);
-        backLight.position.set(0, 0, -5);
-        
-        const topLight = new THREE.DirectionalLight(0xffffff, 0.5);
-        topLight.position.set(0, 5, 0);
-        
-        this.scene.add(frontLight, backLight, topLight);
+        const mainLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        mainLight.position.set(5, 5, 5);
+        this.scene.add(mainLight);
     }
 
     setupControls() {
@@ -276,24 +303,44 @@ class InteractiveSphere {
         }
     }
 
+    // Add touch support for hover effects
     onTouchMove(event) {
         event.preventDefault();
         
         if(!this.isDragging || event.touches.length !== 1) return;
         
         const touch = event.touches[0];
+        const rect = this.renderer.domElement.getBoundingClientRect();
+        this.mouse.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
+        this.mouse.y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
         
-        // Calculate the distance moved
+        this.raycaster.setFromCamera(this.mouse, this.camera);
+        const intersects = this.raycaster.intersectObjects(
+            this.quadrants.map(group => group.children[0])
+        );
+        
+        // Reset all quadrants
+        this.quadrants.forEach(group => {
+            const quadrant = group.children[0];
+            quadrant.material.opacity = quadrant.userData.originalOpacity;
+            quadrant.material.color.setHex(quadrant.userData.originalColor);
+        });
+        
+        // Highlight touched quadrant
+        if(intersects.length > 0) {
+            const quadrant = intersects[0].object;
+            quadrant.material.opacity = 1.0;
+            quadrant.material.color.copy(quadrant.userData.hoverColor);
+        }
+        
+        // Existing touch rotation logic
         const deltaX = touch.clientX - this.lastTouchPosition.x;
         const deltaY = touch.clientY - this.lastTouchPosition.y;
         
-        // If moved more than 10 pixels, definitely not a tap
         if(Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) {
             this.isTap = false;
         }
         
-        // Rotate the sphere based on touch movement
-        // Adjust these multipliers to control rotation sensitivity
         const rotationX = deltaX * 0.005;
         const rotationY = deltaY * 0.005;
         
@@ -302,7 +349,6 @@ class InteractiveSphere {
             quadrant.rotation.x += rotationY;
         });
         
-        // Update the last position
         this.lastTouchPosition = {
             x: touch.clientX,
             y: touch.clientY
@@ -346,15 +392,39 @@ class InteractiveSphere {
  
 
     onPointerMove(event) {
-        if(!this.isDragging) return;
+        if(!this.isDragging) {
+            const rect = this.renderer.domElement.getBoundingClientRect();
+            this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+            this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+            
+            this.raycaster.setFromCamera(this.mouse, this.camera);
+            const intersects = this.raycaster.intersectObjects(
+                this.quadrants.map(group => group.children[0])
+            );
+            
+            // Reset all quadrants
+            this.quadrants.forEach(group => {
+                const quadrant = group.children[0];
+                quadrant.material.opacity = quadrant.userData.originalOpacity;
+                quadrant.material.color.setHex(quadrant.userData.originalColor);
+            });
+            
+            // Highlight hovered quadrant
+            if(intersects.length > 0) {
+                const quadrant = intersects[0].object;
+                quadrant.material.opacity = 1.0;
+                quadrant.material.color.copy(quadrant.userData.hoverColor);
+            }
+        }
         
-        const deltaX = (event.clientX - this.touchStartPosition.x) * 0.01;
-        const deltaY = (event.clientY - this.touchStartPosition.y) * 0.01;
-        
-        this.rotateScene(deltaX, deltaY);
-        
-        this.touchStartPosition.x = event.clientX;
-        this.touchStartPosition.y = event.clientY;
+        // Existing rotation logic
+        if(this.isDragging) {
+            const deltaX = (event.clientX - this.touchStartPosition.x) * 0.01;
+            const deltaY = (event.clientY - this.touchStartPosition.y) * 0.01;
+            this.rotateScene(deltaX, deltaY);
+            this.touchStartPosition.x = event.clientX;
+            this.touchStartPosition.y = event.clientY;
+        }
     }
 
 
