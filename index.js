@@ -536,16 +536,16 @@ class InteractiveSphere {
     }
 
     selectQuadrant(quadrant) {
-        // Define all eight sections in the correct order
+        // Reorder the sections array to match the actual quadrant rendering order
         const sections = [
-            'about', 'experience', 'education', 'skills',
-            'frontend', 'devops', 'backend', 'design'
+            'experience', 'about', 'skills', 'education',  // Top half
+            'devops', 'frontend', 'design', 'backend'      // Bottom half
         ];
         
-        // Use the full index without modulo to get the correct section
+        // Use the quadrant's index to get the correct content
         const content = this.portfolioData[sections[quadrant.userData.index]];
         
-        // Update overlay with the content
+        // Update overlay with content
         const overlay = document.querySelector('.info-overlay');
         overlay.querySelector('.content').innerHTML = content.content;
         overlay.classList.add('active');
