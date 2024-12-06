@@ -330,21 +330,11 @@ class InteractiveSphere {
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
         this.scene.add(ambientLight);
     
-        const mainLightUp = new THREE.DirectionalLight(0xff1500, 0.8);
+        const mainLightUp = new THREE.DirectionalLight(0x00ff00, 0.8);
         mainLightUp.position.set(0, 100, -300);
         this.scene.add(mainLightUp);
 
-        const mainLightDown = new THREE.DirectionalLight(0xff1500, 0.8);
-        mainLightDown.position.set(0, -100, -70);
-        this.scene.add(mainLightDown);
 
-        const mainLightRight = new THREE.DirectionalLight(0xff1500, 0.8);
-        mainLightRight.position.set(100, -40, -120);
-        this.scene.add(mainLightRight);
-
-        const mainLightLeft = new THREE.DirectionalLight(0xff1500, 0.8);
-        mainLightLeft.position.set(-100, -40, -120);
-        this.scene.add(mainLightLeft);
     }
 
     setupControls() {
