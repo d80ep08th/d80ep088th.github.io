@@ -32,7 +32,7 @@ body {
   width: 600px;
   overflow-y: auto;
   transition: transform 0.3s ease;
-  border: 2px solid #4a90e2;
+  border: 1px solid #00ff00;
   opacity: 0;
   pointer-events: none;
 }
@@ -49,27 +49,30 @@ body {
   right: 1rem;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #4a90e2;
+  color: #00ff00;
 }
 
-.content {
+Copy.content {
   margin-top: 1rem;
+  color: #00FF00; /* Add this line to make all text in content green */
 }
 
 .content h2 {
-  color: #4a90e2;
+  color: #00FF00; /* Change from #4a90e2 to green */
   margin-bottom: 1.5rem;
 }
 
 .content p {
   margin-bottom: 1rem;
   line-height: 1.6;
+  color: #00FF00; /* Add this line to ensure paragraphs are green */
 }
 
 .timeline-item {
-  border-left: 2px solid #4a90e2;
+  border-left: 2px solid #00FF00; /* Change border color to match */
   padding-left: 1rem;
   margin-bottom: 1.5rem;
+  color: #00FF00; /* Add this line */
 }
 
 .skills-grid {
@@ -80,10 +83,11 @@ body {
 }
 
 .skill-item {
-  background: rgba(74, 144, 226, 0.1);
+  background: rgba(0, 255, 0, 0.1); /* Change from blue to green with low opacity */
   padding: 1rem;
   border-radius: 0.5rem;
   text-align: center;
+  color: #00FF00; /* Add this line */
 }
 
 .instructions {
