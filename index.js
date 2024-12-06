@@ -536,13 +536,21 @@ class InteractiveSphere {
     }
 
     selectQuadrant(quadrant) {
-        const sections = ['about', 'experience', 'education', 'skills'];
-        const content = this.portfolioData[sections[quadrant.userData.index % 4]];
+        // Define all eight sections in the correct order
+        const sections = [
+            'about', 'experience', 'education', 'skills',
+            'frontend', 'devops', 'backend', 'design'
+        ];
         
+        // Use the full index without modulo to get the correct section
+        const content = this.portfolioData[sections[quadrant.userData.index]];
+        
+        // Update overlay with the content
         const overlay = document.querySelector('.info-overlay');
         overlay.querySelector('.content').innerHTML = content.content;
         overlay.classList.add('active');
         
+        // Handle quadrant animation
         if(this.selectedQuadrant) {
             this.selectedQuadrant.position.copy(this.selectedQuadrant.userData.originalPosition);
         }
@@ -550,8 +558,6 @@ class InteractiveSphere {
         const direction = quadrant.position.clone().normalize();
         quadrant.position.copy(direction.multiplyScalar(0.2));
         this.selectedQuadrant = quadrant;
-
-
     }
 
     onWindowResize() {
