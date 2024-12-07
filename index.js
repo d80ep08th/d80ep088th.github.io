@@ -55,7 +55,7 @@ class InteractiveSphere {
             about: {
                 title: "About Me",
                 content: `<h2>Parth P. Dodë</h2>
-                    <p>Currently completing his MEng. Design [Specialization in Product Design ] at McMaster University. B.Eng. Computer from Mumbai University.</p>
+                    <p>A passionate MEng Design student at McMaster University, specializing in Product Design with a strong foundation in Computer Engineering. Experienced in DevOps, Cloud Architecture, and Full-Stack Development with a focus on secure, scalable solutions.</p>
                     <div class="social-links">
                         <a href="mailto:pd.devsecops@gmail.com"><i class="fas fa-envelope"></i></a>
                         <a href="https://linkedin.com/in/parthdode"><i class="fab fa-linkedin"></i></a>
@@ -64,97 +64,204 @@ class InteractiveSphere {
             },
             experience: {
                 title: "Experience",
-                content: `<h2>Work</h2>
+                content: `<h2>Professional Experience</h2>
                     <div class="timeline-item">
-                        <h3>Google Summer of Code '22 & '20</h3>
-                        <p>The Linux Foundation: Contributed to Automotive Grade Linux[2020] & Uptane[2022]</p>
+                        <h3>Google Summer of Code Contributor</h3>
+                        <p class="timeline-date">2022</p>
+                        <p>The Linux Foundation - Uptane Project</p>
+                        <ul>
+                            <li>Implemented secure OTA updates for automotive systems</li>
+                            <li>Developed security protocols for vehicle software distribution</li>
+                        </ul>
                     </div>
                     <div class="timeline-item">
-                        <h3>DevOps Contractor for Tech Startups [2021-2022]</h3>
-                        <p> Resurface Labs [2021]
-                            Rug Pull Index [2021]
-                            Tattle         [2022] 
-                        </p>
-                        <p> Sourced from r/PythonJobs and hn/whoishiring </p>
+                        <h3>DevOps Contractor</h3>
+                        <p class="timeline-date">2021-2022</p>
+                        <p>Multiple Tech Startups:</p>
+                        <ul>
+                            <li>Resurface Labs (2021): Implemented API security monitoring</li>
+                            <li>Rug Pull Index (2021): Developed blockchain monitoring tools</li>
+                            <li>Tattle (2022): Created automated deployment pipelines</li>
+                        </ul>
                     </div>
-                    `
+                    <div class="timeline-item">
+                        <h3>Google Summer of Code Contributor</h3>
+                        <p class="timeline-date">2020</p>
+                        <p>The Linux Foundation - Automotive Grade Linux</p>
+                        <ul>
+                            <li>Enhanced vehicle-to-cloud connectivity features</li>
+                            <li>Implemented secure communication protocols</li>
+                        </ul>
+                    </div>`
             },
             education: {
                 title: "Education",
-                content: `<h2>Education</h2>
+                content: `<h2>Academic Background</h2>
                     <div class="timeline-item">
                         <h3>McMaster University</h3>
-                        <p>Master of Engineering Design (2023-2025)</p>
-                        <p> Completed by December'24 , Graduation Ceremony in Jun'25 </p>
-                        
+                        <p class="timeline-date">2023-2024</p>
+                        <p>Master of Engineering Design</p>
+                        <p>Specialization: Product Design</p>
+                        <p>Key Projects:</p>
+                        <ul>
+                            <li>IoT-based Smart Manufacturing Systems</li>
+                            <li>Sustainable Product Development</li>
+                        </ul>
                     </div>
                     <div class="timeline-item">
                         <h3>Mumbai University</h3>
-                        <p>Bachelor of Computer Engineering (2016-2020)</p>                        
-                    </div>
-                    `
-            },
-            résumé: {
-                title: "Résumé",
-                content: `<h2>Curriculum Vitae</h2>
-                    <div class="skills-grid">
-                        <div class="skill-item">
-                            <a href=""><i>cv</i></a>
-                        </div>
+                        <p class="timeline-date">2016-2020</p>
+                        <p>Bachelor of Computer Engineering</p>
+                        <p>Focus Areas:</p>
+                        <ul>
+                            <li>Software Architecture</li>
+                            <li>Systems Programming</li>
+                            <li>Network Security</li>
+                        </ul>
                     </div>`
             },
             frontend: {
-                title: "Frontend Tools",
-                content: `<h2>Frontend</h2>
+                title: "Frontend",
+                content: `<h2>Frontend Development</h2>
                     <div class="skills-grid">
                         <div class="skill-item">
-                            <h3>Javascript</h3>
-                            <p>Three.js</p>
+                            <h3>Modern JavaScript</h3>
+                            <ul>
+                                <li>React.js & Next.js</li>
+                                <li>Three.js & WebGL</li>
+                                <li>TypeScript</li>
+                                <li>Tailwind CSS</li>
+                            </ul>
+                        </div>
+                        <div class="skill-item">
+                            <h3>Web Technologies</h3>
+                            <ul>
+                                <li>Progressive Web Apps</li>
+                                <li>WebAssembly</li>
+                                <li>Service Workers</li>
+                                <li>Web Components</li>
+                            </ul>
+                        </div>
+                        <div class="skill-item">
+                            <h3>Testing & Performance</h3>
+                            <ul>
+                                <li>Jest & React Testing Library</li>
+                                <li>Lighthouse Optimization</li>
+                                <li>Web Vitals Monitoring</li>
+                            </ul>
                         </div>
                     </div>`
             },
             devops: {
                 title: "DevOps",
-                content: `<h2>Developer Operations</h2>
+                content: `<h2>DevOps & Cloud</h2>
                     <div class="skills-grid">
                         <div class="skill-item">
-                            <h3>Version Control</h3>
-                            <p>Github, Gitlab, Gerrit</p>
+                            <h3>CI/CD & Version Control</h3>
+                            <ul>
+                                <li>GitHub Actions & GitLab CI</li>
+                                <li>ArgoCD & Flux</li>
+                                <li>Git Flow & Trunk Based Development</li>
+                            </ul>
                         </div>
                         <div class="skill-item">
-                            <h3>Automation</h3>
-                            <p>Github Actions, Ansible, Kubernetes, Docker</p>
+                            <h3>Container Orchestration</h3>
+                            <ul>
+                                <li>Kubernetes & Helm</li>
+                                <li>Docker & Podman</li>
+                                <li>Service Mesh (Istio)</li>
+                            </ul>
+                        </div>
+                        <div class="skill-item">
+                            <h3>Infrastructure & Security</h3>
+                            <ul>
+                                <li>Terraform & Ansible</li>
+                                <li>AWS & GCP</li>
+                                <li>Vault & Cert-Manager</li>
+                                <li>Security Scanning (Trivy, Snyk)</li>
+                            </ul>
                         </div>
                     </div>`
             },
             backend: {
                 title: "Backend",
-                content: `<h2>Backend Tools</h2>
+                content: `<h2>Backend Development</h2>
                     <div class="skills-grid">
                         <div class="skill-item">
-                            <h3>Frameworks</h3>
-                            <p>Django, Meteor</p>
+                            <h3>Languages & Frameworks</h3>
+                            <ul>
+                                <li>Python (Django, FastAPI)</li>
+                                <li>Node.js (Express, NestJS)</li>
+                                <li>Go (Microservices)</li>
+                            </ul>
                         </div>
                         <div class="skill-item">
-                            <h3>Scripting</h3>
-                            <p>Bash, Python</p>
+                            <h3>Databases & Caching</h3>
+                            <ul>
+                                <li>PostgreSQL & MongoDB</li>
+                                <li>Redis & Elasticsearch</li>
+                                <li>TimescaleDB for IoT</li>
+                            </ul>
+                        </div>
+                        <div class="skill-item">
+                            <h3>API & Integration</h3>
+                            <ul>
+                                <li>GraphQL & REST</li>
+                                <li>gRPC & Protocol Buffers</li>
+                                <li>Message Queues (RabbitMQ, Kafka)</li>
+                            </ul>
                         </div>
                     </div>`
             },
             design: {
                 title: "Design",
-                content: `<h2>Design Tools</h2>
+                content: `<h2>Design & Prototyping</h2>
                     <div class="skills-grid">
                         <div class="skill-item">
-                            <h3>Frontend Design</h3>
-                            <p>Figma</p>
+                            <h3>UI/UX Design</h3>
+                            <ul>
+                                <li>Figma & Adobe XD</li>
+                                <li>Design Systems</li>
+                                <li>Responsive Design</li>
+                                <li>User Research</li>
+                            </ul>
                         </div>
                         <div class="skill-item">
-                            <h3>3D Design</h3>
-                            <p>Autocad Fusion 360, Prusa Mki3</p>
+                            <h3>3D Design & Manufacturing</h3>
+                            <ul>
+                                <li>Autodesk Fusion 360</li>
+                                <li>Blender for 3D Modeling</li>
+                                <li>3D Printing (Prusa Mki3)</li>
+                                <li>CAM & CNC Programming</li>
+                            </ul>
+                        </div>
+                        <div class="skill-item">
+                            <h3>Product Design</h3>
+                            <ul>
+                                <li>Rapid Prototyping</li>
+                                <li>Design for Manufacturing</li>
+                                <li>Sustainable Design</li>
+                                <li>IoT Product Integration</li>
+                            </ul>
                         </div>
                     </div>`
             },
+            résumé: {
+                title: "Résumé",
+                content: `<h2>Professional Summary</h2>
+                    <div class="resume-content">
+                        <p>A versatile engineer with expertise spanning:</p>
+                        <ul>
+                            <li>Full-Stack Development</li>
+                            <li>Cloud Architecture & DevOps</li>
+                            <li>Product Design & IoT</li>
+                            <li>Security & Automation</li>
+                        </ul>
+                        <div class="resume-download">
+                            <a href="#" class="download-button">Download Full CV</a>
+                        </div>
+                    </div>`
+            }
         };
 
     
