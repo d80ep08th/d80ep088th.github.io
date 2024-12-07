@@ -55,20 +55,29 @@ class InteractiveSphere {
             about: {
                 title: "About Me",
                 content: `<h2>Parth P. Dodë</h2>
-                    <p>Technology enthusiast specializing in Cybersecurity, Linux, and IoT. Currently pursuing MEng. Design at McMaster University.</p>
+                    <p>Currently completing his MEng. Design [Specialization in Product Design ] at McMaster University. B.Eng. Computer from Mumbai University.</p>
                     <div class="social-links">
-                        <a href="mailto:dodep@mcmaster.ca"><i class="fas fa-envelope"></i></a>
+                        <a href="mailto:pd.devsecops@gmail.com"><i class="fas fa-envelope"></i></a>
                         <a href="https://linkedin.com/in/parthdode"><i class="fab fa-linkedin"></i></a>
                         <a href="https://github.com/d80ep08th"><i class="fab fa-github"></i></a>
                     </div>`
             },
             experience: {
                 title: "Experience",
-                content: `<h2>Work Experience</h2>
+                content: `<h2>Work</h2>
                     <div class="timeline-item">
-                        <h3>Google Summer of Code '22</h3>
-                        <p>The Linux Foundation - Automated infrastructure and optimized deployments</p>
-                    </div>`
+                        <h3>Google Summer of Code '22 & '20</h3>
+                        <p>The Linux Foundation: Contributed to Automotive Grade Linux[2020] & Uptane[2022]</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>DevOps Contractor for Tech Startups [2021-2022]</h3>
+                        <p> Resurface Labs [2021]
+                            Rug Pull Index [2021]
+                            Tattle         [2022] 
+                        </p>
+                        <p> Sourced from r/PythonJobs and hn/whoishiring </p>
+                    </div>
+                    `
             },
             education: {
                 title: "Education",
@@ -76,55 +85,73 @@ class InteractiveSphere {
                     <div class="timeline-item">
                         <h3>McMaster University</h3>
                         <p>Master of Engineering Design (2023-2025)</p>
-                    </div>`
+                        <p> Completed by December'24 , Graduation Ceremony in Jun'25 </p>
+                        
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Mumbai University</h3>
+                        <p>Bachelor of Computer Engineering (2016-2020)</p>                        
+                    </div>
+                    `
             },
-            skills: {
-                title: "Skills",
-                content: `<h2>Technical Skills</h2>
+            résumé: {
+                title: "Résumé",
+                content: `<h2>Curriculum Vitae</h2>
                     <div class="skills-grid">
                         <div class="skill-item">
-                            <h3>DevOps</h3>
-                            <p>Kubernetes, Docker, Ansible</p>
+                            <a href=""><i>cv</i></a>
                         </div>
                     </div>`
             },
             frontend: {
-                title: "Frontend",
-                content: `<h2>Experience with Frotend</h2>
+                title: "Frontend Tools",
+                content: `<h2>Frontend</h2>
                     <div class="skills-grid">
                         <div class="skill-item">
-                            <h3>DevOps</h3>
-                            <p>HTML, CSS, JS</p>
+                            <h3>Javascript</h3>
+                            <p>Three.js</p>
                         </div>
                     </div>`
             },
             devops: {
                 title: "DevOps",
-                content: `<h2>Experience with DevOps</h2>
+                content: `<h2>Developer Operations</h2>
                     <div class="skills-grid">
                         <div class="skill-item">
-                            <h3>DevOps</h3>
-                            <p>Ansible</p>
+                            <h3>Version Control</h3>
+                            <p>Github, Gitlab, Gerrit</p>
+                        </div>
+                        <div class="skill-item">
+                            <h3>Automation</h3>
+                            <p>Github Actions, Ansible, Kubernetes, Docker</p>
                         </div>
                     </div>`
             },
             backend: {
                 title: "Backend",
-                content: `<h2>Experience with Backend</h2>
+                content: `<h2>Backend Tools</h2>
                     <div class="skills-grid">
                         <div class="skill-item">
-                            <h3>Backend</h3>
+                            <h3>Frameworks</h3>
                             <p>Django, Meteor</p>
+                        </div>
+                        <div class="skill-item">
+                            <h3>Scripting</h3>
+                            <p>Bash, Python</p>
                         </div>
                     </div>`
             },
             design: {
                 title: "Design",
-                content: `<h2>Experience with Design</h2>
+                content: `<h2>Design Tools</h2>
                     <div class="skills-grid">
                         <div class="skill-item">
-                            <h3>Design</h3>
-                            <p>Figma, AutoCad Fusion 360</p>
+                            <h3>Frontend Design</h3>
+                            <p>Figma</p>
+                        </div>
+                        <div class="skill-item">
+                            <h3>3D Design</h3>
+                            <p>Autocad Fusion 360, Prusa Mki3</p>
                         </div>
                     </div>`
             },
@@ -248,7 +275,7 @@ class InteractiveSphere {
         
         // Define all 8 section titles
         const sections = [
-            'About', 'Experience', 'Education', 'Skills',
+            'About', 'Experience', 'Education', 'Résumé',
             'Frontend', 'DevOps', 'Backend', 'Design'
         ];
         
@@ -540,7 +567,7 @@ class InteractiveSphere {
     selectQuadrant(quadrant) {
         // Reorder the sections array to match the actual quadrant rendering order
         const sections = [
-            'experience', 'about', 'skills', 'education',  // Top half
+            'experience', 'about', 'résumé', 'education',  // Top half
             'devops', 'frontend', 'design', 'backend'      // Bottom half
         ];
         
