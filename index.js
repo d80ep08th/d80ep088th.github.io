@@ -54,8 +54,14 @@ class InteractiveSphere {
         this.portfolioData = {
             about: {
                 title: "About Me",
-                content: `<h2>Parth P. Dodë</h2>
-                    <p>A versatile Full-Stack & DevOps engineer pursuing MEng Design at McMaster University, specializing in scalable cloud architecture, AI integration, and secure product development. Experienced in building high-performance distributed systems with a focus on developer experience and infrastructure automation.</p>
+                content: `<h2>Parth P. Dodë </h2>
+                    <p>26 year old, curious, trilingual and a lifelong student of design thinking, Parth is an engineer raised in an academic family of engineers.</p>
+                    <p>He was being mentored by hackers from The Linux Foundation as he was finishing his undergrad in computer engineering which led to him securing contracts
+                       from international and national startups as a devops engineer for the next year and a half at the end of which he again pursued The Linux Foundation
+                       to sharpen his devops and backend chops under the mentorship of their hackers. His last experience as an apprentice influenced him to study design and 
+                       as of December 2024, Parth will have the credits required to receive his "Master's in Engineering Design degree with a specialization in Product Design"
+                       from McMaster University, Hamilton, Canada.
+                    </p>
                     <div class="social-links">
                         <a href="mailto:pd.devsecops@gmail.com"><i class="fas fa-envelope"></i></a>
                         <a href="https://linkedin.com/in/parthdode"><i class="fab fa-linkedin"></i></a>
@@ -65,8 +71,19 @@ class InteractiveSphere {
             experience: {
                 title: "Experience",
                 content: `<h2>Professional Experience</h2>
+                    
                     <div class="timeline-item">
-                        <h3>DevOps & Cloud Architecture Lead</h3>
+                        <h3>Google Summer of Code Contributor</h3>
+                        <p class="timeline-date">2022</p>
+                        <p>The Linux Foundation - Uptane Project</p>
+                        <ul>
+                            <li>Developed secure OTA update system using Go and React</li>
+                            <li>Implemented zero-trust security architecture for vehicle software distribution</li>
+                            <li>Created automated testing infrastructure for continuous deployment</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Developer Operations Contractor</h3>
                         <p class="timeline-date">2021-2022</p>
                         <p>Multiple Tech Startups:</p>
                         <ul>
@@ -79,16 +96,6 @@ class InteractiveSphere {
                                     <li>Managed Kubernetes clusters with custom Helm charts and Kustomize</li>
                                 </ul>
                             </li>
-                        </ul>
-                    </div>
-                    <div class="timeline-item">
-                        <h3>Google Summer of Code Contributor</h3>
-                        <p class="timeline-date">2022</p>
-                        <p>The Linux Foundation - Uptane Project</p>
-                        <ul>
-                            <li>Developed secure OTA update system using Go and React</li>
-                            <li>Implemented zero-trust security architecture for vehicle software distribution</li>
-                            <li>Created automated testing infrastructure for continuous deployment</li>
                         </ul>
                     </div>
                     <div class="timeline-item">
@@ -108,39 +115,39 @@ class InteractiveSphere {
                     <div class="skills-grid">
                         <div class="skill-item">
                             <h3>Core Technologies</h3>
-                            <ul>
-                                <li>React.js with TypeScript</li>
-                                <li>Vue.js 3 with Composition API</li>
-                                <li>Next.js & Server Components</li>
-                                <li>Three.js & WebGL</li>
-                            </ul>
+                            
+                                React.js with TypeScript</br>
+                                Vue.js 3 with Composition API</br>
+                                Next.js & Server Components</br>
+                                Three.js & WebGL</br>
+                            
                         </div>
                         <div class="skill-item">
                             <h3>State Management & APIs</h3>
-                            <ul>
-                                <li>Redux Toolkit & RTK Query</li>
-                                <li>GraphQL with Apollo Client</li>
-                                <li>RESTful API Integration</li>
-                                <li>WebSocket Real-time Updates</li>
-                            </ul>
+                            
+                             Redux Toolkit & RTK Query</br>
+                             GraphQL with Apollo Client</br>
+                             RESTful API Integration</br>
+                             WebSocket Real-time Updates</br>
+                            
                         </div>
                         <div class="skill-item">
                             <h3>Styling & UI</h3>
-                            <ul>
-                                <li>Tailwind CSS & CSS Modules</li>
-                                <li>Responsive & Mobile-first Design</li>
-                                <li>WCAG Accessibility Standards</li>
-                                <li>Component Libraries (shadcn/ui)</li>
-                            </ul>
+                            
+                            Tailwind CSS & CSS Modules</br>
+                            Responsive & Mobile-first Design</br>
+                            WCAG Accessibility Standards</br>
+                            Component Libraries (shadcn/ui)</br>
+                            
                         </div>
                         <div class="skill-item">
                             <h3>Testing & Performance</h3>
-                            <ul>
-                                <li>Jest & React Testing Library</li>
-                                <li>Playwright E2E Testing</li>
-                                <li>Storybook Component Testing</li>
-                                <li>Web Vitals Optimization</li>
-                            </ul>
+                            
+                            Jest & React Testing Library</br>
+                            Playwright E2E Testing</br>
+                            Storybook Component Testing</br>
+                            Web Vitals Optimization</br>
+                            
                         </div>
                     </div>`
             },
@@ -150,39 +157,39 @@ class InteractiveSphere {
                     <div class="skills-grid">
                         <div class="skill-item">
                             <h3>Languages & Frameworks</h3>
-                            <ul>
-                                <li>Node.js (Express, NestJS)</li>
-                                <li>Ruby on Rails with Sorbet</li>
-                                <li>Python (Django, FastAPI)</li>
-                                <li>Go for Microservices</li>
-                            </ul>
+                            
+                                Node.js (Express, NestJS)</br>
+                                Ruby on Rails with Sorbet</br>
+                                Python (Django, FastAPI)</br>
+                                Go for Microservices</br>
+                            
                         </div>
                         <div class="skill-item">
                             <h3>Databases & Search</h3>
-                            <ul>
-                                <li>PostgreSQL & MySQL</li>
-                                <li>MongoDB & ScyllaDB</li>
-                                <li>Elasticsearch & Redis</li>
-                                <li>TimescaleDB for IoT</li>
+                            
+                                PostgreSQL & MySQL</br>
+                                MongoDB & ScyllaDB</br>
+                                Elasticsearch & Redis</br>
+                                TimescaleDB for IoT</br>
                             </ul>
                         </div>
                         <div class="skill-item">
                             <h3>API Design</h3>
-                            <ul>
-                                <li>RESTful API Architecture</li>
-                                <li>GraphQL API Development</li>
-                                <li>gRPC & Protocol Buffers</li>
-                                <li>OpenAPI Specification</li>
-                            </ul>
+                            
+                                RESTful API Architecture
+                                GraphQL API Development
+                                gRPC & Protocol Buffers
+                                OpenAPI Specification
+                            
                         </div>
                         <div class="skill-item">
                             <h3>Message Queues & Jobs</h3>
-                            <ul>
-                                <li>RabbitMQ & Apache Kafka</li>
-                                <li>Redis Pub/Sub</li>
-                                <li>Sidekiq Background Jobs</li>
-                                <li>Bull Queue Management</li>
-                            </ul>
+                            
+                               RabbitMQ & Apache Kafka</br>
+                               Redis Pub/Sub</br>
+                               Sidekiq Background Jobs</br>
+                               Bull Queue Management</br>
+                            
                         </div>
                     </div>`
             },
@@ -192,39 +199,39 @@ class InteractiveSphere {
                     <div class="skills-grid">
                         <div class="skill-item">
                             <h3>Cloud Platforms</h3>
-                            <ul>
-                                <li>AWS (EC2, Lambda, ECS)</li>
-                                <li>GCP (Cloud Run, GKE)</li>
-                                <li>Cloudflare (Workers, R2)</li>
-                                <li>Infrastructure as Code</li>
-                            </ul>
+                            
+                                AWS (EC2, Lambda, ECS)</br>
+                                GCP (Cloud Run, GKE)</br>
+                                Cloudflare (Workers, R2)</br>
+                                Infrastructure as Code</br>
+                            
                         </div>
                         <div class="skill-item">
                             <h3>Container Orchestration</h3>
-                            <ul>
-                                <li>Kubernetes & EKS/GKE</li>
-                                <li>Helm Charts & Kustomize</li>
-                                <li>Docker & Containerization</li>
-                                <li>Service Mesh (Istio)</li>
-                            </ul>
+                            
+                                Kubernetes & EKS/GKE</br>
+                                Helm Charts & Kustomize</br>
+                                Docker & Containerization</br>
+                                Service Mesh (Istio)</br>
+                            
                         </div>
                         <div class="skill-item">
                             <h3>Infrastructure Automation</h3>
-                            <ul>
-                                <li>Terraform & Terragrunt</li>
-                                <li>Ansible & Puppet</li>
-                                <li>GitHub Actions & GitLab CI</li>
-                                <li>ArgoCD & Flux CD</li>
-                            </ul>
+                            
+                                Terraform & Terragrunt</br>
+                                Ansible & Puppet</br>
+                          GitHub Actions & GitLab CI</br>
+                         ArgoCD & Flux CD</br>
+                        
                         </div>
                         <div class="skill-item">
                             <h3>Monitoring & Security</h3>
-                            <ul>
-                                <li>Prometheus & Grafana</li>
-                                <li>ELK Stack & CloudWatch</li>
-                                <li>HashiCorp Vault</li>
-                                <li>Security Scanning (Trivy)</li>
-                            </ul>
+                            
+                                Prometheus & Grafana</br>
+                                ELK Stack & CloudWatch</br>
+                                HashiCorp Vault</br>
+                                Security Scanning (Trivy)</br>
+                            
                         </div>
                     </div>`
             },
@@ -234,30 +241,29 @@ class InteractiveSphere {
                     <div class="skills-grid">
                         <div class="skill-item">
                             <h3>UI/UX Design</h3>
-                            <ul>
-                                <li>Figma & Design Systems</li>
-                                <li>User Research & Testing</li>
-                                <li>Responsive Prototypes</li>
-                                <li>Accessibility Standards</li>
-                            </ul>
+                          
+                                Figma & Design Systems</br>
+                                User Research & Testing</br>
+                                Responsive Prototypes</br>
+                                Accessibility Standards</br>
+                            
                         </div>
                         <div class="skill-item">
                             <h3>System Architecture</h3>
-                            <ul>
-                                <li>Distributed Systems Design</li>
-                                <li>Microservices Architecture</li>
-                                <li>Event-Driven Design</li>
-                                <li>API Gateway Patterns</li>
-                            </ul>
+                            
+                                Distributed Systems Design</br>
+                                Microservices Architecture</br>
+                                Event-Driven Design</br>
+                                API Gateway Patterns</br>
+                            
                         </div>
                         <div class="skill-item">
                             <h3>3D & Manufacturing</h3>
-                            <ul>
-                                <li>Fusion 360 CAD/CAM</li>
-                                <li>3D Printing (Prusa)</li>
-                                <li>CNC Programming</li>
-                                <li>IoT Integration</li>
-                            </ul>
+                           
+                                Fusion 360 CAD/CAM</br>
+                                3D Printing (Prusa)</br>
+                                CNC Programming</br>
+                                IoT Integration</br>
                         </div>
                     </div>`
             },
@@ -267,25 +273,20 @@ class InteractiveSphere {
                     <div class="timeline-item">
                         <h3>McMaster University</h3>
                         <p class="timeline-date">2023-2024</p>
-                        <p>Master of Engineering Design</p>
-                        <p>Focus Areas:</p>
-                        <ul>
-                            <li>Cloud-Native Architecture</li>
-                            <li>AI/ML System Integration</li>
-                            <li>Distributed Systems</li>
-                            <li>Security Engineering</li>
-                        </ul>
+                        <p>Master of Engineering Design [Specializing in Product Design]</p>
+                        <p>Courses Taken:</p>
+                        <ol>
+                            <li>Human Centered Design</li>
+                            <li>Design Thinking</li>
+                            <li>Internet of Things and Industrial Internet of Things</li>
+                            <li>Manufacturing Systems</li>
+                        </ol>
                     </div>
                     <div class="timeline-item">
                         <h3>Mumbai University</h3>
                         <p class="timeline-date">2016-2020</p>
                         <p>Bachelor of Computer Engineering</p>
-                        <p>Specializations:</p>
-                        <ul>
-                            <li>Systems Programming</li>
-                            <li>Network Security</li>
-                            <li>Software Architecture</li>
-                        </ul>
+                      
                     </div>`
             }
         };
