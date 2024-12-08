@@ -55,7 +55,7 @@ class InteractiveSphere {
             about: {
                 title: "About Me",
                 content: `<h2>Parth P. Dodë</h2>
-                    <p>A passionate MEng Design student at McMaster University, specializing in Product Design with a strong foundation in Computer Engineering. Experienced in DevOps, Cloud Architecture, and Full-Stack Development with a focus on secure, scalable solutions.</p>
+                    <p>A versatile Full-Stack & DevOps engineer pursuing MEng Design at McMaster University, specializing in scalable cloud architecture, AI integration, and secure product development. Experienced in building high-performance distributed systems with a focus on developer experience and infrastructure automation.</p>
                     <div class="social-links">
                         <a href="mailto:pd.devsecops@gmail.com"><i class="fas fa-envelope"></i></a>
                         <a href="https://linkedin.com/in/parthdode"><i class="fab fa-linkedin"></i></a>
@@ -66,22 +66,29 @@ class InteractiveSphere {
                 title: "Experience",
                 content: `<h2>Professional Experience</h2>
                     <div class="timeline-item">
+                        <h3>DevOps & Cloud Architecture Lead</h3>
+                        <p class="timeline-date">2021-2022</p>
+                        <p>Multiple Tech Startups:</p>
+                        <ul>
+                            <li>Resurface Labs: Implemented end-to-end API security monitoring using ELK stack and custom alerting systems</li>
+                            <li>Rug Pull Index: Architected blockchain monitoring infrastructure using GraphQL and distributed systems</li>
+                            <li>Tattle: 
+                                <ul>
+                                    <li>Designed CI/CD pipelines with GitHub Actions and ArgoCD</li>
+                                    <li>Implemented Infrastructure as Code using Terraform and Ansible</li>
+                                    <li>Managed Kubernetes clusters with custom Helm charts and Kustomize</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
                         <h3>Google Summer of Code Contributor</h3>
                         <p class="timeline-date">2022</p>
                         <p>The Linux Foundation - Uptane Project</p>
                         <ul>
-                            <li>Implemented secure OTA updates for automotive systems</li>
-                            <li>Developed security protocols for vehicle software distribution</li>
-                        </ul>
-                    </div>
-                    <div class="timeline-item">
-                        <h3>DevOps Contractor</h3>
-                        <p class="timeline-date">2021-2022</p>
-                        <p>Multiple Tech Startups:</p>
-                        <ul>
-                            <li>Resurface Labs (2021): Implemented API security monitoring</li>
-                            <li>Rug Pull Index (2021): Developed blockchain monitoring tools</li>
-                            <li>Tattle (2022): Created automated deployment pipelines</li>
+                            <li>Developed secure OTA update system using Go and React</li>
+                            <li>Implemented zero-trust security architecture for vehicle software distribution</li>
+                            <li>Created automated testing infrastructure for continuous deployment</li>
                         </ul>
                     </div>
                     <div class="timeline-item">
@@ -89,34 +96,9 @@ class InteractiveSphere {
                         <p class="timeline-date">2020</p>
                         <p>The Linux Foundation - Automotive Grade Linux</p>
                         <ul>
-                            <li>Enhanced vehicle-to-cloud connectivity features</li>
-                            <li>Implemented secure communication protocols</li>
-                        </ul>
-                    </div>`
-            },
-            education: {
-                title: "Education",
-                content: `<h2>Academic Background</h2>
-                    <div class="timeline-item">
-                        <h3>McMaster University</h3>
-                        <p class="timeline-date">2023-2024</p>
-                        <p>Master of Engineering Design</p>
-                        <p>Specialization: Product Design</p>
-                        <p>Key Projects:</p>
-                        <ul>
-                            <li>IoT-based Smart Manufacturing Systems</li>
-                            <li>Sustainable Product Development</li>
-                        </ul>
-                    </div>
-                    <div class="timeline-item">
-                        <h3>Mumbai University</h3>
-                        <p class="timeline-date">2016-2020</p>
-                        <p>Bachelor of Computer Engineering</p>
-                        <p>Focus Areas:</p>
-                        <ul>
-                            <li>Software Architecture</li>
-                            <li>Systems Programming</li>
-                            <li>Network Security</li>
+                            <li>Built cloud-native vehicle connectivity platform using Node.js and TypeScript</li>
+                            <li>Implemented WebSocket-based real-time communication system</li>
+                            <li>Created comprehensive E2E testing suite using Playwright</li>
                         </ul>
                     </div>`
             },
@@ -125,60 +107,39 @@ class InteractiveSphere {
                 content: `<h2>Frontend Development</h2>
                     <div class="skills-grid">
                         <div class="skill-item">
-                            <h3>Modern JavaScript</h3>
+                            <h3>Core Technologies</h3>
                             <ul>
-                                <li>React.js & Next.js</li>
+                                <li>React.js with TypeScript</li>
+                                <li>Vue.js 3 with Composition API</li>
+                                <li>Next.js & Server Components</li>
                                 <li>Three.js & WebGL</li>
-                                <li>TypeScript</li>
-                                <li>Tailwind CSS</li>
                             </ul>
                         </div>
                         <div class="skill-item">
-                            <h3>Web Technologies</h3>
+                            <h3>State Management & APIs</h3>
                             <ul>
-                                <li>Progressive Web Apps</li>
-                                <li>WebAssembly</li>
-                                <li>Service Workers</li>
-                                <li>Web Components</li>
+                                <li>Redux Toolkit & RTK Query</li>
+                                <li>GraphQL with Apollo Client</li>
+                                <li>RESTful API Integration</li>
+                                <li>WebSocket Real-time Updates</li>
+                            </ul>
+                        </div>
+                        <div class="skill-item">
+                            <h3>Styling & UI</h3>
+                            <ul>
+                                <li>Tailwind CSS & CSS Modules</li>
+                                <li>Responsive & Mobile-first Design</li>
+                                <li>WCAG Accessibility Standards</li>
+                                <li>Component Libraries (shadcn/ui)</li>
                             </ul>
                         </div>
                         <div class="skill-item">
                             <h3>Testing & Performance</h3>
                             <ul>
                                 <li>Jest & React Testing Library</li>
-                                <li>Lighthouse Optimization</li>
-                                <li>Web Vitals Monitoring</li>
-                            </ul>
-                        </div>
-                    </div>`
-            },
-            devops: {
-                title: "DevOps",
-                content: `<h2>DevOps & Cloud</h2>
-                    <div class="skills-grid">
-                        <div class="skill-item">
-                            <h3>CI/CD & Version Control</h3>
-                            <ul>
-                                <li>GitHub Actions & GitLab CI</li>
-                                <li>ArgoCD & Flux</li>
-                                <li>Git Flow & Trunk Based Development</li>
-                            </ul>
-                        </div>
-                        <div class="skill-item">
-                            <h3>Container Orchestration</h3>
-                            <ul>
-                                <li>Kubernetes & Helm</li>
-                                <li>Docker & Podman</li>
-                                <li>Service Mesh (Istio)</li>
-                            </ul>
-                        </div>
-                        <div class="skill-item">
-                            <h3>Infrastructure & Security</h3>
-                            <ul>
-                                <li>Terraform & Ansible</li>
-                                <li>AWS & GCP</li>
-                                <li>Vault & Cert-Manager</li>
-                                <li>Security Scanning (Trivy, Snyk)</li>
+                                <li>Playwright E2E Testing</li>
+                                <li>Storybook Component Testing</li>
+                                <li>Web Vitals Optimization</li>
                             </ul>
                         </div>
                     </div>`
@@ -190,81 +151,144 @@ class InteractiveSphere {
                         <div class="skill-item">
                             <h3>Languages & Frameworks</h3>
                             <ul>
-                                <li>Python (Django, FastAPI)</li>
                                 <li>Node.js (Express, NestJS)</li>
-                                <li>Go (Microservices)</li>
+                                <li>Ruby on Rails with Sorbet</li>
+                                <li>Python (Django, FastAPI)</li>
+                                <li>Go for Microservices</li>
                             </ul>
                         </div>
                         <div class="skill-item">
-                            <h3>Databases & Caching</h3>
+                            <h3>Databases & Search</h3>
                             <ul>
-                                <li>PostgreSQL & MongoDB</li>
-                                <li>Redis & Elasticsearch</li>
+                                <li>PostgreSQL & MySQL</li>
+                                <li>MongoDB & ScyllaDB</li>
+                                <li>Elasticsearch & Redis</li>
                                 <li>TimescaleDB for IoT</li>
                             </ul>
                         </div>
                         <div class="skill-item">
-                            <h3>API & Integration</h3>
+                            <h3>API Design</h3>
                             <ul>
-                                <li>GraphQL & REST</li>
+                                <li>RESTful API Architecture</li>
+                                <li>GraphQL API Development</li>
                                 <li>gRPC & Protocol Buffers</li>
-                                <li>Message Queues (RabbitMQ, Kafka)</li>
+                                <li>OpenAPI Specification</li>
+                            </ul>
+                        </div>
+                        <div class="skill-item">
+                            <h3>Message Queues & Jobs</h3>
+                            <ul>
+                                <li>RabbitMQ & Apache Kafka</li>
+                                <li>Redis Pub/Sub</li>
+                                <li>Sidekiq Background Jobs</li>
+                                <li>Bull Queue Management</li>
+                            </ul>
+                        </div>
+                    </div>`
+            },
+            devops: {
+                title: "DevOps",
+                content: `<h2>DevOps & Cloud Infrastructure</h2>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <h3>Cloud Platforms</h3>
+                            <ul>
+                                <li>AWS (EC2, Lambda, ECS)</li>
+                                <li>GCP (Cloud Run, GKE)</li>
+                                <li>Cloudflare (Workers, R2)</li>
+                                <li>Infrastructure as Code</li>
+                            </ul>
+                        </div>
+                        <div class="skill-item">
+                            <h3>Container Orchestration</h3>
+                            <ul>
+                                <li>Kubernetes & EKS/GKE</li>
+                                <li>Helm Charts & Kustomize</li>
+                                <li>Docker & Containerization</li>
+                                <li>Service Mesh (Istio)</li>
+                            </ul>
+                        </div>
+                        <div class="skill-item">
+                            <h3>Infrastructure Automation</h3>
+                            <ul>
+                                <li>Terraform & Terragrunt</li>
+                                <li>Ansible & Puppet</li>
+                                <li>GitHub Actions & GitLab CI</li>
+                                <li>ArgoCD & Flux CD</li>
+                            </ul>
+                        </div>
+                        <div class="skill-item">
+                            <h3>Monitoring & Security</h3>
+                            <ul>
+                                <li>Prometheus & Grafana</li>
+                                <li>ELK Stack & CloudWatch</li>
+                                <li>HashiCorp Vault</li>
+                                <li>Security Scanning (Trivy)</li>
                             </ul>
                         </div>
                     </div>`
             },
             design: {
                 title: "Design",
-                content: `<h2>Design & Prototyping</h2>
+                content: `<h2>Product & System Design</h2>
                     <div class="skills-grid">
                         <div class="skill-item">
                             <h3>UI/UX Design</h3>
                             <ul>
-                                <li>Figma & Adobe XD</li>
-                                <li>Design Systems</li>
-                                <li>Responsive Design</li>
-                                <li>User Research</li>
+                                <li>Figma & Design Systems</li>
+                                <li>User Research & Testing</li>
+                                <li>Responsive Prototypes</li>
+                                <li>Accessibility Standards</li>
                             </ul>
                         </div>
                         <div class="skill-item">
-                            <h3>3D Design & Manufacturing</h3>
+                            <h3>System Architecture</h3>
                             <ul>
-                                <li>Autodesk Fusion 360</li>
-                                <li>Blender for 3D Modeling</li>
-                                <li>3D Printing (Prusa Mki3)</li>
-                                <li>CAM & CNC Programming</li>
+                                <li>Distributed Systems Design</li>
+                                <li>Microservices Architecture</li>
+                                <li>Event-Driven Design</li>
+                                <li>API Gateway Patterns</li>
                             </ul>
                         </div>
                         <div class="skill-item">
-                            <h3>Product Design</h3>
+                            <h3>3D & Manufacturing</h3>
                             <ul>
-                                <li>Rapid Prototyping</li>
-                                <li>Design for Manufacturing</li>
-                                <li>Sustainable Design</li>
-                                <li>IoT Product Integration</li>
+                                <li>Fusion 360 CAD/CAM</li>
+                                <li>3D Printing (Prusa)</li>
+                                <li>CNC Programming</li>
+                                <li>IoT Integration</li>
                             </ul>
                         </div>
                     </div>`
             },
-            résumé: {
-                title: "Résumé",
-                content: `<h2>Professional Summary</h2>
-                    <div class="resume-content">
-                        <p>A versatile engineer with expertise spanning:</p>
+            education: {
+                title: "Education",
+                content: `<h2>Academic Background</h2>
+                    <div class="timeline-item">
+                        <h3>McMaster University</h3>
+                        <p class="timeline-date">2023-2024</p>
+                        <p>Master of Engineering Design</p>
+                        <p>Focus Areas:</p>
                         <ul>
-                            <li>Full-Stack Development</li>
-                            <li>Cloud Architecture & DevOps</li>
-                            <li>Product Design & IoT</li>
-                            <li>Security & Automation</li>
+                            <li>Cloud-Native Architecture</li>
+                            <li>AI/ML System Integration</li>
+                            <li>Distributed Systems</li>
+                            <li>Security Engineering</li>
                         </ul>
-                        <div class="resume-download">
-                            <a href="#" class="download-button">Download Full CV</a>
-                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Mumbai University</h3>
+                        <p class="timeline-date">2016-2020</p>
+                        <p>Bachelor of Computer Engineering</p>
+                        <p>Specializations:</p>
+                        <ul>
+                            <li>Systems Programming</li>
+                            <li>Network Security</li>
+                            <li>Software Architecture</li>
+                        </ul>
                     </div>`
             }
         };
-
-    
         this.colors = Array(8).fill(0x0000FF);
 
         // Labels for each quadrant
